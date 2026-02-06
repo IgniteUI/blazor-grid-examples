@@ -1,3 +1,0 @@
-import { css } from 'lit';
-export const styles = css `:host{--item-hover-background: var(--ig-tabs-item-hover-background, hsl(from var(--ig-gray-100) h s l/0.5));--item-active-hover-background: var(--ig-tabs-item-active-hover-background, hsl(from var(--ig-gray-100) h s l/0.5))}`;
-//# sourceMappingURL=tab.shared.css.js.map

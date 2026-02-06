@@ -1,3 +1,0 @@
-import { css } from 'lit';
-export const styles = css `:host{--icon-color: var(--ig-badge-icon-color, var(--ig-primary-100-contrast));--text-color: var(--ig-badge-text-color, var(--ig-primary-100-contrast));--border-radius: var(--ig-badge-border-radius, max(var(--is-large, 1) * max(0.25rem, -1 * 0.25rem), var(--is-medium, 1) * max(0.25rem, -1 * 0.25rem), var(--is-small, 1) * max(0.125rem, -1 * 0.125rem)));--dot-size: var(--ig-badge-dot-size, max(var(--is-large, 1) * max(0.875rem, -1 * 0.875rem), var(--is-medium, 1) * max(0.625rem, -1 * 0.625rem), var(--is-small, 1) * max(0.375rem, -1 * 0.375rem)));--ig-theme: bootstrap}`;
-//# sourceMappingURL=badge.bootstrap.css.js.map

@@ -1,3 +1,0 @@
-import { css } from 'lit';
-export const styles = css `:host{color-scheme:dark;--chat-input-border: var(--ig-chat-chat-input-border, var(--ig-gray-200));--code-border: var(--ig-chat-code-border, var(--ig-gray-200))}:host igc-chat-message::part(message-container){--shiki-purple: #b392f0;--shiki-navy: #e1e4e8;--shiki-dark-blue: #9ecbff;--shiki-red: #f97583;--shiki-blue: #79bbff;--shiki-green: #85e89d;--shiki-orange: #ffab70}`;
-//# sourceMappingURL=chat.shared.css.js.map

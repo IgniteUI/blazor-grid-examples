@@ -1,3 +1,0 @@
-import { css } from 'lit';
-export const styles = css `:host{--header-min-height: 3rem}[part~=inner]{flex-grow:1}:host([alignment=start]) [part~=inner]:not([part~=scrollable])::after{box-shadow:inset 0 calc(var(--_border-size)*-1) 0 0 var(--border-color)}:host([alignment=center]) [part~=inner]:not([part~=scrollable])::before,:host([alignment=center]) [part~=inner]:not([part~=scrollable])::after{box-shadow:inset 0 calc(var(--_border-size)*-1) 0 0 var(--border-color)}:host([alignment=end]) [part~=inner]:not([part~=scrollable])::before{box-shadow:inset 0 calc(var(--_border-size)*-1) 0 0 var(--border-color)}[part=selected-indicator]{display:none}`;
-//# sourceMappingURL=tabs.bootstrap.css.js.map

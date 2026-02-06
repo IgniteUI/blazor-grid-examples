@@ -1,3 +1,0 @@
-import { css } from 'lit';
-export const styles = css `slot[name=title]{font-family:var(--ig-subtitle-2-font-family, var(--ig-font-family));font-size:var(--ig-subtitle-2-font-size);font-weight:var(--ig-subtitle-2-font-weight);font-style:var(--ig-subtitle-2-font-style);line-height:var(--ig-subtitle-2-line-height);letter-spacing:var(--ig-subtitle-2-letter-spacing);text-transform:var(--ig-subtitle-2-text-transform);margin-top:var(--ig-subtitle-2-margin-top);margin-bottom:var(--ig-subtitle-2-margin-bottom);margin:0}slot[name=prefix]{margin-inline-end:1rem}`;
-//# sourceMappingURL=chat.fluent.css.js.map

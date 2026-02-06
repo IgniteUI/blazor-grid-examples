@@ -1,3 +1,0 @@
-import { css } from 'lit';
-export const styles = css `:host{--component-size: var(--ig-size, var(--default-size))}[part=base]{padding:max(var(--is-large, 1)*max(0.1875rem, -1 * 0.1875rem)*var(--ig-spacing-large, var(--ig-spacing, var(--ig-spacing))),var(--is-medium, 1)*max(0.1875rem, -1 * 0.1875rem)*var(--ig-spacing-medium, var(--ig-spacing, var(--ig-spacing))),var(--is-small, 1)*max(0.1875rem, -1 * 0.1875rem)*var(--ig-spacing-small, var(--ig-spacing, var(--ig-spacing))));outline:var(--border-width) solid var(--border-color);outline-offset:-0.0625rem}`;
-//# sourceMappingURL=dropdown.indigo.css.js.map

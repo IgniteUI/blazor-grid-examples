@@ -1,3 +1,0 @@
-import { css } from 'lit';
-export const styles = css `:host{padding:max(var(--is-large, 1)*max(1rem, -1 * 1rem)*var(--ig-spacing-large, var(--ig-spacing, var(--ig-spacing))),var(--is-medium, 1)*max(1rem, -1 * 1rem)*var(--ig-spacing-medium, var(--ig-spacing, var(--ig-spacing))),var(--is-small, 1)*max(1rem, -1 * 1rem)*var(--ig-spacing-small, var(--ig-spacing, var(--ig-spacing))))}:host ::slotted(igc-button),:host ::slotted(igc-icon-button){--ig-size: 2}:host([orientation=vertical]){gap:.5rem}`;
-//# sourceMappingURL=card.actions.indigo.css.js.map

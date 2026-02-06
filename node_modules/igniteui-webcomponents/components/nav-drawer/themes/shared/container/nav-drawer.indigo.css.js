@@ -1,3 +1,0 @@
-import { css } from 'lit';
-export const styles = css `:host{--menu-mini-width: 3rem}:host [part=overlay]{background:var(--background-color)}:host [part=mini],:host [part=main]{padding:max(var(--is-large, 1)*max(0.5rem, -1 * 0.5rem)*var(--ig-spacing-large, var(--ig-spacing, var(--ig-spacing))),var(--is-medium, 1)*max(0.5rem, -1 * 0.5rem)*var(--ig-spacing-medium, var(--ig-spacing, var(--ig-spacing))),var(--is-small, 1)*max(0.5rem, -1 * 0.5rem)*var(--ig-spacing-small, var(--ig-spacing, var(--ig-spacing))))}`;
-//# sourceMappingURL=nav-drawer.indigo.css.js.map

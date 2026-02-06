@@ -1,3 +1,0 @@
-import { css } from 'lit';
-export const styles = css `:host{--fill-color: var(--ig-radio-fill-color, var(--ig-secondary-500));--error-color: var(--ig-radio-error-color, var(--ig-error-800));--focus-outline-color: var(--ig-radio-focus-outline-color, transparent);--fill-hover-border-color: var(--ig-radio-fill-hover-border-color, var(--ig-secondary-500));--empty-color: var(--ig-radio-empty-color, var(--ig-gray-600));--fill-color-hover: var(--ig-radio-fill-color-hover, var(--ig-secondary-500));--error-color-hover: var(--ig-radio-error-color-hover, var(--ig-error-800));--ig-theme: material}`;
-//# sourceMappingURL=radio.material.css.js.map
