@@ -1,3 +1,0 @@
-import { css } from 'lit';
-export const styles = css `igc-textarea::part(input){max-height:8.75rem}[part~=input-container]{border-radius:.8125rem}[part~=dragging] igc-textarea::part(container){background:var(--box-background-hover)}[part~=dragging] igc-textarea::part(container)::after{border-block-end-color:var(--focused-bottom-line-color)}[part~=dragging] igc-textarea::part(input){color:var(--focused-text-color)}[part=attachment-wrapper] igc-chip{--ig-size: 1}`;
-//# sourceMappingURL=input.indigo.css.js.map

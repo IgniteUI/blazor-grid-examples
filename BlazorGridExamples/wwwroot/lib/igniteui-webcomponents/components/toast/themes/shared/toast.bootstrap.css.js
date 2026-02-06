@@ -1,3 +1,0 @@
-import { css } from 'lit';
-export const styles = css `:host{padding:max(var(--is-large, 1)*max(0.75rem, -1 * 0.75rem)*var(--ig-spacing-large, var(--ig-spacing, var(--ig-spacing))),var(--is-medium, 1)*max(0.75rem, -1 * 0.75rem)*var(--ig-spacing-medium, var(--ig-spacing, var(--ig-spacing))),var(--is-small, 1)*max(0.75rem, -1 * 0.75rem)*var(--ig-spacing-small, var(--ig-spacing, var(--ig-spacing))))}`;
-//# sourceMappingURL=toast.bootstrap.css.js.map

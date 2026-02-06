@@ -1,11 +1,15 @@
 using BlazorGridExamples.Components;
 using BlazorGridExamples.Services;
+using IgniteUI.Blazor.Controls;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// Register IgniteUI Blazor
+builder.Services.AddIgniteUIBlazor();
 
 // Register custom services
 builder.Services.AddScoped<FinancialService>();

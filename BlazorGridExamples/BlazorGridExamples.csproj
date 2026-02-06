@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="IgniteUI.Blazor.Trial" Version="25.2.38" />
+  </ItemGroup>
+
 </Project>

@@ -1,3 +1,0 @@
-import { css } from 'lit';
-export const styles = css `:host{--shiki-bg: var(--code-background)}[part~=sent]{background:var(--message-background)}[part~=message-container]{color:var(--message-color)}[part~=message-container] pre.shiki{border:.0625rem solid var(--code-border)}[part~=message-actions] igc-icon-button::part(icon){color:var(--message-actions-color)}`;
-//# sourceMappingURL=chat-message.common.css.js.map
