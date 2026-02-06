@@ -7,9 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-// Register HttpClient
-builder.Services.AddScoped<HttpClient>();
-
 // Register custom services
 builder.Services.AddScoped<FinancialService>();
 
