@@ -84,7 +84,7 @@
         InvokeAsync(() =>
         {
             StateHasChanged();
-            // Refresh grid data
+            // Trigger grid change detection to refresh with updated data
             if (grid != null)
             {
                 grid.MarkForCheck();
