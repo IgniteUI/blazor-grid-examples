@@ -1,0 +1,1 @@
+{"version":3,"file":"chat-message.fluent.css.js","sourceRoot":"","sources":["../../../../../../src/components/chat/themes/shared/chat-message/chat-message.fluent.css.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,GAAG,EAAE,MAAM,KAAK,CAAC;AAE1B,MAAM,CAAC,MAAM,MAAM,GAAG,GAAG,CAAA,EAAE,CAAC","sourcesContent":["import { css } from 'lit';\n\nexport const styles = css``;\n"]}

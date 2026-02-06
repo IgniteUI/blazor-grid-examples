@@ -1,0 +1,3 @@
+import { css } from 'lit';
+export const styles = css `:host{--background: var(--ig-chat-background, var(--ig-gray-900-contrast));--header-border: var(--ig-chat-header-border, var(--ig-gray-300));--code-border: var(--ig-chat-code-border, var(--ig-gray-400));--focused-border-color: var(--ig-chat-focused-border-color, var(--ig-primary-500));--focused-secondary-color: var(--ig-chat-focused-secondary-color, hsl(from var(--ig-primary-500) h s l/0.38));--ig-theme: bootstrap}`;
+//# sourceMappingURL=chat.bootstrap.css.js.map

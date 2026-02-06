@@ -1,0 +1,36 @@
+{
+  "name": "igniteui-webcomponents-grids",
+  "version": "6.2.2",
+  "description": "Ignite UI Web Components grid components.",
+  "homepage": "https://github.com/IgniteUI/igniteui-webcomponents-grids",
+  "keywords": [
+    "web components",
+    "UI Components",
+    "grid",
+    "scroll",
+    "datagrid",
+    "data",
+    "infragistics",
+    "grids"
+  ],
+  "license": "Infragistics(R) Ultimate license (http://www.infragistics.com/legal/ultimate/license/)",
+  "dependencies": {
+    "tslib": "^2.3.1",
+    "lit": "^3.3.0"
+  },
+  "sideEffects": [
+    "./grids/combined.js"
+  ],
+  "typings": "./grids/index.d.ts",
+  "main": "./grids/index.js",
+  "module": "./grids/index.js",
+  "type": "module",
+  "maintainers": [
+    {
+      "name": "igniteui",
+      "email": "igniteui@infragistics.com"
+    }
+  ],
+  "customElements": "./custom-elements.json",
+  "web-types": "./web-types.json"
+}

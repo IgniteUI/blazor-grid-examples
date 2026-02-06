@@ -1,0 +1,3 @@
+import { css } from 'lit';
+export const styles = css `[part=header]{box-shadow:none;border-block-end:.0625rem solid var(--header-border)}slot[name=title]{font-family:var(--ig-h5-font-family, var(--ig-font-family));font-size:var(--ig-h5-font-size);font-weight:var(--ig-h5-font-weight);font-style:var(--ig-h5-font-style);line-height:var(--ig-h5-line-height);letter-spacing:var(--ig-h5-letter-spacing);text-transform:var(--ig-h5-text-transform);margin-top:var(--ig-h5-margin-top);margin-bottom:var(--ig-h5-margin-bottom);margin:0}slot[name=prefix]{margin-inline-end:1rem}igc-list{border:none}`;
+//# sourceMappingURL=chat.bootstrap.css.js.map

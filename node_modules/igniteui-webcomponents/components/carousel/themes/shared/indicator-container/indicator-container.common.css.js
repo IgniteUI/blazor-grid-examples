@@ -1,0 +1,3 @@
+import { css } from 'lit';
+export const styles = css `[part~=base]{--indicator-border-active-color: var(--indicator-active-border-color);--indicator-dot-active-color: var(--indicator-active-dot-color);--indicator-active-hover-color: var(--indicator-active-hover-dot-color)}[part="base focused"]{--indicator-border-active-color: var(--indicator-focus-color);--indicator-dot-active-color: var(--indicator-focus-color);--indicator-active-hover-color: var(--indicator-focus-color)}[part="base focused"] ::slotted(div)::after{position:absolute;content:"";pointer-events:none;width:100%;height:100%;border-radius:inherit;border:.125rem solid var(--indicator-focus-color)}`;
+//# sourceMappingURL=indicator-container.common.css.js.map

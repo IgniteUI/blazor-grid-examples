@@ -1,0 +1,92 @@
+import { type ITreeResourceStrings } from 'igniteui-i18n-core';
+import { LitElement } from 'lit';
+import type { Constructor } from '../common/mixins/constructor.js';
+import type { TreeSelection } from '../types.js';
+import type { IgcTreeComponentEventMap } from './tree.common.js';
+import { IgcTreeNavigationService } from './tree.navigation.js';
+import { IgcTreeSelectionService } from './tree.selection.js';
+import IgcTreeItemComponent from './tree-item.js';
+declare const IgcTreeComponent_base: Constructor<import("../common/mixins/event-emitter.js").EventEmitterInterface<IgcTreeComponentEventMap>> & Constructor<LitElement>;
+/**
+ * The tree allows users to represent hierarchical data in a tree-view structure,
+ * maintaining parent-child relationships, as well as to define static tree-view structure without a corresponding data model.
+ *
+ * @element igc-tree
+ *
+ * @slot - Renders the tree items inside default slot.
+ *
+ * @fires igcSelection - Emitted when item selection is changing, before the selection completes.
+ * @fires igcItemCollapsed - Emitted when tree item is collapsed.
+ * @fires igcItemCollapsing - Emitted when tree item is about to collapse.
+ * @fires igcItemExpanded - Emitted when tree item is expanded.
+ * @fires igcItemExpanding - Emitted when tree item is about to expand.
+ * @fires igcActiveItem - Emitted when the tree's `active` item changes.
+ */
+export default class IgcTreeComponent extends IgcTreeComponent_base {
+    static readonly tagName = "igc-tree";
+    static styles: import("lit").CSSResult;
+    static register(): void;
+    private readonly _i18nController;
+    /** @private @hidden @internal */
+    selectionService: IgcTreeSelectionService;
+    /** @private @hidden @internal */
+    navService: IgcTreeNavigationService;
+    /**
+     * Whether a single or multiple of a parent's child items can be expanded.
+     * @attr single-branch-expand
+     */
+    singleBranchExpand: boolean;
+    /**
+     * Whether clicking over nodes will change their expanded state or not.
+     * @attr toggle-node-on-click
+     */
+    toggleNodeOnClick: boolean;
+    /**
+     * The selection state of the tree.
+     * @attr
+     */
+    selection: TreeSelection;
+    /**
+     * Gets/Sets the locale used for getting language, affecting resource strings.
+     * @attr locale
+     */
+    set locale(value: string);
+    get locale(): string;
+    /**
+     * The resource strings for localization.
+     * Currently only aria-labels of the default expand/collapse icons are localized for the tree item.
+     */
+    set resourceStrings(value: ITreeResourceStrings);
+    get resourceStrings(): ITreeResourceStrings;
+    protected onDirChange(): void;
+    protected selectionModeChange(): void;
+    protected singleBranchExpandChange(): void;
+    constructor();
+    connectedCallback(): void;
+    /** Returns all of the tree's items. */
+    get items(): Array<IgcTreeItemComponent>;
+    private handleKeydown;
+    /** @private */
+    expandToItem(item: IgcTreeItemComponent): void;
+    /** Select all items if the items collection is empty. Otherwise, select the items in the items collection. */
+    select(items?: IgcTreeItemComponent[]): void;
+    /** Deselect all items if the items collection is empty. Otherwise, deselect the items in the items collection. */
+    deselect(items?: IgcTreeItemComponent[]): void;
+    /**
+     * Expands all of the passed items.
+     * If no items are passed, expands ALL items.
+     */
+    expand(items?: IgcTreeItemComponent[]): void;
+    /**
+     * Collapses all of the passed items.
+     * If no items are passed, collapses ALL items.
+     */
+    collapse(items?: IgcTreeItemComponent[]): void;
+    protected render(): import("lit-html").TemplateResult<1>;
+}
+declare global {
+    interface HTMLElementTagNameMap {
+        'igc-tree': IgcTreeComponent;
+    }
+}
+export {};
