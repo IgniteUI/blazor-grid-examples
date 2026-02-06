@@ -25,6 +25,10 @@ bld/
 node_modules/
 npm-debug.log
 
+# Web components library (built from node_modules)
+wwwroot/lib/igniteui-webcomponents/
+wwwroot/lib/igniteui-webcomponents-grids/
+
 # Visual Studio cache/options
 .vs/
 .vscode/

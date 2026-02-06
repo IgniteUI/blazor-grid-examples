@@ -7,7 +7,7 @@ namespace BlazorGridExamples.Services;
 public class FinancialService
 {
     private readonly HttpClient _httpClient;
-    private const string DataUrl = "https://www.infragistics.com/grid-examples-data/data/finance/finance.json";
+    private const string DataUrl = "/data/finance.json";  // Local data file
 
     public List<FinancialData> Data { get; private set; } = new();
     public event Action? OnDataChanged;
@@ -26,7 +26,9 @@ public class FinancialService
                 PropertyNameCaseInsensitive = true
             };
 
-            Data = await _httpClient.GetFromJsonAsync<List<FinancialData>>(DataUrl, options) ?? new();
+            // Load from embedded resource or wwwroot
+            var jsonText = await File.ReadAllTextAsync("wwwroot/data/finance.json");
+            Data = JsonSerializer.Deserialize<List<FinancialData>>(jsonText, options) ?? new();
             
             // Calculate derived fields
             var totalPortfolioInvestment = Data.Sum(x => x.Value!.BoughtPrice * x.Positions);

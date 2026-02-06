@@ -1,0 +1,14 @@
+
+
+
+
+
+
+
+    export declare class IgcExporterOptions
+    {
+
+    }
+
+
+        

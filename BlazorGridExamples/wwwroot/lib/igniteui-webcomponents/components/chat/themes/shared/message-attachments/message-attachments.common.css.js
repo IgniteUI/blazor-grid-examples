@@ -1,0 +1,3 @@
+import { css } from 'lit';
+export const styles = css `[part=attachment-header],[part=attachment-content],[part="attachment-content sent"]{border:.0625rem solid var(--image-border)}[part=attachment-header]{background:var(--image-background);border-block-end:none}[part~=attachment-content]{background:var(--file-background)}[part=attachment-content]{border-block-start:none}[part~=attachment-icon]{color:var(--image-attachment-icon)}[part=file-attachment-icon]{--color: var(--file-icon-color);--accent-color: var(--file-icon-accent-color)}`;
+//# sourceMappingURL=message-attachments.common.css.js.map

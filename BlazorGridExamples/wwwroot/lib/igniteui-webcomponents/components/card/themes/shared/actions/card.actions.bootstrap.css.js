@@ -1,0 +1,3 @@
+import { css } from 'lit';
+export const styles = css `:host{padding:max(var(--is-large, 1)*max(1rem, -1 * 1rem)*var(--ig-spacing-large, var(--ig-spacing, var(--ig-spacing))),var(--is-medium, 1)*max(1rem, -1 * 1rem)*var(--ig-spacing-medium, var(--ig-spacing, var(--ig-spacing))),var(--is-small, 1)*max(1rem, -1 * 1rem)*var(--ig-spacing-small, var(--ig-spacing, var(--ig-spacing))))}`;
+//# sourceMappingURL=card.actions.bootstrap.css.js.map

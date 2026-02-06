@@ -1,0 +1,68 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+import { html, LitElement } from 'lit';
+import { property } from 'lit/decorators.js';
+import { addThemingController } from '../../theming/theming-controller.js';
+import { addInternalsController } from '../common/controllers/internals.js';
+import { addSlotController } from '../common/controllers/slot.js';
+import { registerComponent } from '../common/definitions/register.js';
+import { partMap } from '../common/part-map.js';
+import { styles } from './themes/badge.base.css.js';
+import { styles as shared } from './themes/shared/badge.common.css.js';
+import { all } from './themes/themes.js';
+export default class IgcBadgeComponent extends LitElement {
+    static { this.tagName = 'igc-badge'; }
+    static { this.styles = [styles, shared]; }
+    static register() {
+        registerComponent(IgcBadgeComponent);
+    }
+    _handleSlotChange() {
+        const assignedNodes = this._slots.getAssignedNodes('[default]', true);
+        this._iconPart = assignedNodes.some((node) => node.nodeType === Node.ELEMENT_NODE &&
+            node.tagName.toLowerCase() === 'igc-icon');
+    }
+    constructor() {
+        super();
+        this._iconPart = false;
+        this._slots = addSlotController(this, {
+            onChange: this._handleSlotChange,
+        });
+        this._internals = addInternalsController(this, {
+            initialARIA: { role: 'status' },
+        });
+        this.variant = 'primary';
+        this.outlined = false;
+        this.shape = 'rounded';
+        this.dot = false;
+        addThemingController(this, all);
+    }
+    willUpdate(changedProperties) {
+        if (changedProperties.has('variant')) {
+            this._internals.setARIA({ ariaRoleDescription: `badge ${this.variant}` });
+        }
+    }
+    render() {
+        return html `
+      <span part=${partMap({ base: true, icon: this._iconPart })}>
+        <slot></slot>
+      </span>
+    `;
+    }
+}
+__decorate([
+    property({ reflect: true })
+], IgcBadgeComponent.prototype, "variant", void 0);
+__decorate([
+    property({ type: Boolean, reflect: true })
+], IgcBadgeComponent.prototype, "outlined", void 0);
+__decorate([
+    property({ reflect: true })
+], IgcBadgeComponent.prototype, "shape", void 0);
+__decorate([
+    property({ type: Boolean, reflect: true })
+], IgcBadgeComponent.prototype, "dot", void 0);
+//# sourceMappingURL=badge.js.map

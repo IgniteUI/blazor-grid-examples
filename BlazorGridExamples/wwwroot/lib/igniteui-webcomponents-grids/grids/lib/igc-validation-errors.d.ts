@@ -1,0 +1,11 @@
+
+
+
+
+    export declare class IgcValidationErrors
+    {
+
+    }
+
+
+        

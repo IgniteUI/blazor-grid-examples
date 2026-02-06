@@ -1,0 +1,3 @@
+import { css } from 'lit';
+export const styles = css `:host{--item-hover-color: var(--ig-tabs-item-hover-color, var(--ig-gray-700));--item-active-color: var(--ig-tabs-item-active-color, var(--ig-primary-900));--item-active-hover-color: var(--ig-tabs-item-active-hover-color, var(--ig-primary-900));--item-active-icon-color: var(--ig-tabs-item-active-icon-color, var(--ig-primary-900));--item-active-hover-icon-color: var(--ig-tabs-item-active-hover-icon-color, var(--ig-primary-900));--indicator-color: var(--ig-tabs-indicator-color, var(--ig-primary-900));--ig-theme: material;--navigation-border-color: var(--border-color)}`;
+//# sourceMappingURL=tab.material.css.js.map

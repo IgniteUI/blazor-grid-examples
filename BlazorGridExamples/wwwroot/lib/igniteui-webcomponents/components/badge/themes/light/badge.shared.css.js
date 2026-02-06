@@ -1,0 +1,3 @@
+import { css } from 'lit';
+export const styles = css `:host{--elevation: var(--ig-badge-elevation, var(--ig-elevation-1));--icon-color: var(--ig-badge-icon-color, var(--ig-primary-900-contrast));--text-color: var(--ig-badge-text-color, var(--ig-primary-900-contrast));--border-color: var(--ig-badge-border-color, var(--ig-gray-900-contrast));--background-color: var(--ig-badge-background-color, var(--ig-primary-500));--border-radius: var(--ig-badge-border-radius, 0);--size: var(--ig-badge-size, max(var(--is-large, 1) * max(1.625rem, -1 * 1.625rem), var(--is-medium, 1) * max(1.375rem, -1 * 1.375rem), var(--is-small, 1) * max(1rem, -1 * 1rem)));--default-size: var(--ig-badge-default-size, 2)}`;
+//# sourceMappingURL=badge.shared.css.js.map

@@ -1,0 +1,3 @@
+import { css } from 'lit';
+export const styles = css `:host{--background: var(--ig-chat-background, var(--ig-gray-900-contrast));--header-color: var(--ig-chat-header-color, var(--ig-gray-900));--message-actions-color: var(--ig-chat-message-actions-color, var(--ig-primary-500));--focused-border-color: var(--ig-chat-focused-border-color, var(--ig-primary-500));--ig-theme: fluent}`;
+//# sourceMappingURL=chat.fluent.css.js.map

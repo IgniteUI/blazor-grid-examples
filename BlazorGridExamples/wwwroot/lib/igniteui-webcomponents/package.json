@@ -1,0 +1,113 @@
+{
+  "name": "igniteui-webcomponents",
+  "version": "6.5.1",
+  "description": "Ignite UI for Web Components is a complete library of UI components, giving you the ability to build modern web applications using encapsulation and the concept of reusable components in a dependency-free approach.",
+  "author": "Infragistics",
+  "license": "MIT",
+  "homepage": "https://www.infragistics.com/products/ignite-ui-web-components",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./themes/*.css": "./themes/*.css",
+    "./extras": {
+      "types": "./extras/index.d.ts",
+      "default": "./extras/index.js"
+    }
+  },
+  "type": "module",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IgniteUI/igniteui-webcomponents.git"
+  },
+  "bugs": {
+    "url": "https://github.com/IgniteUI/igniteui-webcomponents/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "webcomponents",
+    "web components",
+    "UI components",
+    "AI chat",
+    "accordion",
+    "avatar",
+    "badge",
+    "banner",
+    "button",
+    "button group",
+    "calendar",
+    "card",
+    "carousel",
+    "circular progress",
+    "chat",
+    "checkbox",
+    "chip",
+    "combo",
+    "date input",
+    "date picker",
+    "date range picker",
+    "dialog",
+    "divider",
+    "dropdown",
+    "expansion panel",
+    "form",
+    "icon",
+    "input",
+    "linear progress",
+    "list",
+    "mask",
+    "mask input",
+    "navbar",
+    "navdrawer",
+    "progress",
+    "range slider",
+    "radio",
+    "rating",
+    "snackbar",
+    "stepper",
+    "switch",
+    "slider",
+    "tabs",
+    "textarea",
+    "toast",
+    "tooltip",
+    "tree"
+  ],
+  "customElements": "custom-elements.json",
+  "web-types": "./web-types.json",
+  "dependencies": {
+    "@floating-ui/dom": "^1.7.0",
+    "@lit-labs/virtualizer": "^2.1.0",
+    "@lit/context": "^1.1.0",
+    "igniteui-i18n-core": "^1.0.1",
+    "lit": "^3.3.0"
+  },
+  "peerDependencies": {
+    "dompurify": "^3.3.0",
+    "igniteui-i18n-resources": "^1.0.1",
+    "marked": "^17.0.0",
+    "marked-shiki": "^1.2.0",
+    "shiki": "^3.20.0"
+  },
+  "peerDependenciesMeta": {
+    "dompurify": {
+      "optional": true
+    },
+    "igniteui-i18n-resources": {
+      "optional": true
+    },
+    "marked": {
+      "optional": true
+    },
+    "marked-shiki": {
+      "optional": true
+    },
+    "shiki": {
+      "optional": true
+    }
+  }
+}
