@@ -1,10 +1,17 @@
 using BlazorGridExamples.Components;
+using BlazorGridExamples.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// Register HttpClient
+builder.Services.AddHttpClient();
+
+// Register custom services
+builder.Services.AddScoped<FinancialService>();
 
 var app = builder.Build();
 

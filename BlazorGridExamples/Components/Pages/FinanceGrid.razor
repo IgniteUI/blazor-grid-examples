@@ -1,0 +1,119 @@
+@page "/finance-grid"
+@using BlazorGridExamples.Services
+@using BlazorGridExamples.Models
+@inject FinancialService FinancialService
+@implements IDisposable
+@rendermode InteractiveServer
+
+<PageTitle>Financial Portfolio - Blazor Grid Examples</PageTitle>
+
+<div class="container-fluid">
+    <h2 class="my-4">Financial Portfolio</h2>
+    
+    @if (isLoading)
+    {
+        <div class="text-center my-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-3">Loading financial data...</p>
+        </div>
+    }
+    else if (!FinancialService.Data.Any())
+    {
+        <div class="alert alert-warning" role="alert">
+            No data available. Please check your connection.
+        </div>
+    }
+    else
+    {
+        <div class="grid-container">
+            <igc-grid id="financeGrid" auto-generate="false" allow-filtering="true">
+                <!-- Grid columns will be configured via JavaScript -->
+            </igc-grid>
+        </div>
+    }
+</div>
+
+<style>
+    .grid-container {
+        height: calc(100vh - 200px);
+        min-height: 500px;
+    }
+
+    igc-grid {
+        height: 100%;
+        width: 100%;
+    }
+
+    .profit-condition {
+        color: #28a745;
+    }
+
+    .loss-condition {
+        color: #dc3545;
+    }
+
+    .assets-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+</style>
+
+@code {
+    private bool isLoading = true;
+    private System.Timers.Timer? updateTimer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        FinancialService.OnDataChanged += OnDataChanged;
+        await FinancialService.LoadDataAsync();
+        isLoading = false;
+
+        // Start auto-update timer (every 3 seconds)
+        updateTimer = new System.Timers.Timer(3000);
+        updateTimer.Elapsed += (sender, args) =>
+        {
+            FinancialService.UpdateAllPrices();
+        };
+        updateTimer.Start();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !isLoading && FinancialService.Data.Any())
+        {
+            await InitializeGrid();
+        }
+    }
+
+    private async Task InitializeGrid()
+    {
+        var dataJson = System.Text.Json.JsonSerializer.Serialize(FinancialService.Data);
+        await JSRuntime.InvokeVoidAsync("initializeFinanceGrid", dataJson);
+    }
+
+    private void OnDataChanged()
+    {
+        InvokeAsync(async () =>
+        {
+            StateHasChanged();
+            if (!isLoading)
+            {
+                var dataJson = System.Text.Json.JsonSerializer.Serialize(FinancialService.Data);
+                await JSRuntime.InvokeVoidAsync("updateFinanceGridData", dataJson);
+            }
+        });
+    }
+
+    public void Dispose()
+    {
+        updateTimer?.Stop();
+        updateTimer?.Dispose();
+        FinancialService.OnDataChanged -= OnDataChanged;
+    }
+
+    [Microsoft.AspNetCore.Components.Inject]
+    private Microsoft.JSInterop.IJSRuntime JSRuntime { get; set; } = default!;
+}
