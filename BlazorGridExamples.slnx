@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/BlazorGridExamples/BlazorGridExamples.csproj" />
+  </Folder>
+  <Folder Name="/src/samples/">
+    <Project Path="src/samples/ERPInventory/ERPInventory.csproj" />
+    <Project Path="src/samples/FinanceGrid/FinanceGrid.csproj" />
+    <Project Path="src/samples/FleetManagement/FleetManagement.csproj" />
+    <Project Path="src/samples/HRPortal/HRPortal.csproj" />
+    <Project Path="src/samples/SalesGrid/SalesGrid.csproj" />
+  </Folder>
+</Solution>
