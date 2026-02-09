@@ -1,0 +1,143 @@
+@inject NavigationManager NavigationManager
+
+<div class="demo-container">
+    <div class="tabs-info-wrapper-element">
+        <div class="tab-container">
+            @foreach (var tab in Tabs)
+            {
+                <div class="tab-item-container" @onclick="() => NavigateToSample(tab.Key)">
+                    <div class="tab-item @(IsActive(tab.Key) ? "tab-item--selected" : "")">
+                        <div class="tab-header @(IsActive(tab.Key) ? "" : "tab-header--disabled")">
+                            @tab.Title.ToUpper()
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (CurrentTab != null)
+        {
+            <div class="current-tab-info">
+                <div class="sample-info">
+                    <div class="tab-header">@CurrentTab.Title</div>
+                    <div class="tab-description">@CurrentTab.Description</div>
+                </div>
+
+                <div class="sample-actions">
+                    <div class="theme-info">Theme: Bootstrap</div>
+                    <div class="theme-info">Mode: Light</div>
+                    <div class="action-buttons">
+                        <button class="custom-button" @onclick="() => DownloadSample(CurrentTab.Key)">
+                            <span class="download-icon">⬇</span>
+                            Download
+                        </button>
+
+                        <button class="custom-button" @onclick="() => ViewMore(CurrentTab.Key)">
+                            <span>👁</span>
+                            View More
+                        </button>
+
+                        <button class="custom-button" @onclick="ToggleFullscreen">
+                            <span>@(isFullscreen ? "⊗" : "⛶")</span>
+                            <span>@(isFullscreen ? "Exit Fullscreen" : "Fullscreen")</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="router-container">
+        @ChildContent
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    private bool isFullscreen = false;
+
+    private class TabInfo
+    {
+        public string Key { get; set; } = "";
+        public string Title { get; set; } = "";
+        public string Description { get; set; } = "";
+        public int Port { get; set; }
+    }
+
+    private List<TabInfo> Tabs = new()
+    {
+        new TabInfo 
+        { 
+            Key = "finance-grid", 
+            Title = "Financial Portfolio", 
+            Description = "An example app showing assets, profit, and loss analyses with live data updates and high-performance Data Grid.",
+            Port = 5001
+        },
+        new TabInfo 
+        { 
+            Key = "sales-grid", 
+            Title = "Sales Dashboard", 
+            Description = "Sales app example with summaries by region, product, and time periods using Pivot Grid.",
+            Port = 5002
+        },
+        new TabInfo 
+        { 
+            Key = "hr-portal", 
+            Title = "HR Portal", 
+            Description = "Example featuring a Tree Grid to manage and display employee information.",
+            Port = 5003
+        },
+        new TabInfo 
+        { 
+            Key = "erp-hgrid", 
+            Title = "ERP/Inventory", 
+            Description = "Sample app for ERP/Inventory handling large data volumes using Hierarchical Grid.",
+            Port = 5004
+        },
+        new TabInfo 
+        { 
+            Key = "fleet-management", 
+            Title = "Fleet Management", 
+            Description = "Sample app with a Master-Detail Grid for managing vehicle acquisition, operations, and maintenance.",
+            Port = 5005
+        }
+    };
+
+    private TabInfo? CurrentTab => Tabs.FirstOrDefault(t => IsActive(t.Key));
+
+    private bool IsActive(string key)
+    {
+        var currentPath = new Uri(NavigationManager.Uri).LocalPath;
+        return currentPath.Contains(key, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private void NavigateToSample(string key)
+    {
+        NavigationManager.NavigateTo($"/{key}");
+    }
+
+    private async Task DownloadSample(string key)
+    {
+        // TODO: Implement download functionality
+        // This would zip the sample project and download it
+        await Task.CompletedTask;
+    }
+
+    private void ViewMore(string key)
+    {
+        // Navigate to documentation or more info
+        var tab = Tabs.FirstOrDefault(t => t.Key == key);
+        if (tab != null)
+        {
+            NavigationManager.NavigateTo($"https://www.infragistics.com/products/ignite-ui-blazor/blazor/components/grids/grid/overview", true);
+        }
+    }
+
+    private void ToggleFullscreen()
+    {
+        isFullscreen = !isFullscreen;
+        // TODO: Implement actual fullscreen toggle using JS Interop
+    }
+}

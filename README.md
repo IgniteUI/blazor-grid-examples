@@ -1,28 +1,32 @@
 # Blazor Grid Examples
 
-Discover Blazor examples created with Ignite UI components. Explore advanced data grids and high-performance rendering, see real implementations, and learn best practices you can apply to your own apps.
+Discover Blazor examples created with Ignite UI for Blazor. Explore advanced data grids, see real implementations, and learn best practices you can apply to your own apps.
 
-## Home Page
-<img src="https://github.com/user-attachments/assets/3bc77b88-8ca2-4c7c-a0a3-2ec77ac127b5" alt="Blazor Grid Examples Home" width="800" />
+## Repository Structure
 
-## Financial Portfolio Example
-<img src="https://github.com/user-attachments/assets/97399246-b791-46aa-8de0-7de6afdad9d3" alt="Financial Portfolio Grid" width="800" />
-
-An example app showing assets, profit, and loss analyses with live data updates. Features a high-performance data grid with:
-- Real-time price updates every 3 seconds
-- Color-coded profit/loss indicators
-- Sortable columns
-- Responsive design
-- NET Profit calculations
-- Portfolio allocation tracking
+```
+blazor-grid-examples/
+├── BlazorGridExamples.slnx        # Solution file
+├── src/
+│   ├── BlazorGridExamples/        # Main navigation/landing application
+│   └── samples/                   # Individual sample projects
+│       ├── FinanceGrid/           # Financial Portfolio sample
+│       ├── SalesGrid/             # Sales Dashboard sample
+│       ├── HRPortal/              # HR Portal sample
+│       ├── ERPInventory/          # ERP/Inventory sample
+│       └── FleetManagement/       # Fleet Management sample
+└── README.md
+```
 
 ## Getting Started
 
 ### Prerequisites
 - .NET 8.0 SDK or later
-- Node.js and npm (for building web components)
+- A code editor (Visual Studio, VS Code, or Rider)
 
-### Installation
+### Running All Samples
+
+To run all samples together with the navigation application:
 
 1. Clone the repository:
 ```bash
@@ -30,89 +34,126 @@ git clone https://github.com/IgniteUI/blazor-grid-examples.git
 cd blazor-grid-examples
 ```
 
-2. Install npm dependencies:
-```bash
-npm install
-```
+2. Start each sample project in separate terminals:
 
-3. Build and run the Blazor application:
+**Terminal 1 - Main Navigation (Port 5000):**
 ```bash
-cd BlazorGridExamples
+cd src/BlazorGridExamples
 dotnet run
 ```
 
-4. Open your browser and navigate to `http://localhost:5096`
+**Terminal 2 - Finance Grid (Port 5001):**
+```bash
+cd src/samples/FinanceGrid
+dotnet run
+```
 
-## Examples
+**Terminal 3 - Sales Grid (Port 5002):**
+```bash
+cd src/samples/SalesGrid
+dotnet run
+```
 
-### Financial Portfolio
-**Route:** `/finance-grid`
+**Terminal 4 - HR Portal (Port 5003):**
+```bash
+cd src/samples/HRPortal
+dotnet run
+```
 
-A Blazor example displaying a financial portfolio with live market data simulation. Demonstrates:
-- Data binding and updates
-- Conditional styling (profit/loss colors)
-- Percentage and currency formatting
-- Auto-refresh functionality
+**Terminal 5 - ERP/Inventory (Port 5004):**
+```bash
+cd src/samples/ERPInventory
+dotnet run
+```
 
-### Sales Dashboard
-**Route:** `/sales-grid` *(Coming Soon)*
+**Terminal 6 - Fleet Management (Port 5005):**
+```bash
+cd src/samples/FleetManagement
+dotnet run
+```
+
+3. Open your browser and navigate to `http://localhost:5000`
+
+### Running Individual Samples
+
+Each sample can be run independently:
+
+```bash
+cd src/samples/FinanceGrid
+dotnet run
+```
+
+Then navigate to `http://localhost:5001` (or the appropriate port for your sample).
+
+## Available Samples
+
+### 1. Financial Portfolio
+**Port:** 5001 | **Status:** ✅ Implemented
+
+A Blazor example displaying a financial portfolio with live market data simulation. Features:
+- IgbGrid component with 8 columns
+- Real-time price updates every 3 seconds
+- Color-coded profit/loss indicators
+- Sortable and filterable columns
+- Currency and percentage formatting
+
+**Technologies:** IgbGrid, IgniteUI.Blazor.Trial, Blazor Server
+
+### 2. Sales Dashboard
+**Port:** 5002 | **Status:** 🚧 Planned
 
 Sales app example with summaries by region, product, and time periods.
 
-### HR Portal  
-**Route:** `/hr-portal` *(Coming Soon)*
+**Technologies:** IgbPivotGrid (Planned)
+
+### 3. HR Portal
+**Port:** 5003 | **Status:** 🚧 Planned
 
 Example featuring employee information management.
 
-### ERP/Inventory
-**Route:** `/erp-hgrid` *(Coming Soon)*
+**Technologies:** IgbTreeGrid (Planned)
+
+### 4. ERP/Inventory
+**Port:** 5004 | **Status:** 🚧 Planned
 
 Sample app for ERP/Inventory handling large data volumes.
 
-### Fleet Management
-**Route:** `/fleet-management` *(Coming Soon)*
+**Technologies:** IgbHierarchicalGrid (Planned)
+
+### 5. Fleet Management
+**Port:** 5005 | **Status:** 🚧 Planned
 
 Sample app for managing vehicle acquisition, operations, and maintenance.
+
+**Technologies:** IgbGrid with Master-Detail (Planned)
+
+## Project Architecture
+
+### Main Navigation Application
+The main application (`src/BlazorGridExamples`) provides:
+- Horizontal tab navigation matching Angular examples
+- Sample information display with Download button
+- Theme/Mode switcher
+- Fullscreen toggle
+- iframe-based hosting of sample applications
+
+### Sample Projects
+Each sample is a standalone Blazor Server project that can be:
+- Downloaded individually
+- Run independently
+- Modified without affecting other samples
+- Deployed separately
+
+## Download Samples
+
+Individual samples can be downloaded directly from the navigation application using the Download button in each sample's info bar.
 
 ## Technology Stack
 
 - **Blazor Server** - .NET 8.0
+- **IgniteUI.Blazor.Trial** - v25.2.38
 - **Bootstrap 5** - UI Framework
-- **Ignite UI Web Components** - Grid components
 - **C#** - Backend logic and services
-
-## Project Structure
-
-```
-blazor-grid-examples/
-├── BlazorGridExamples/           # Main Blazor application
-│   ├── Components/
-│   │   ├── Pages/                # Razor pages/components
-│   │   │   ├── Home.razor
-│   │   │   ├── FinanceGrid.razor
-│   │   │   └── ...
-│   │   └── Layout/               # Layout components
-│   ├── Models/                   # Data models
-│   ├── Services/                 # Business logic services
-│   ├── wwwroot/                  # Static files
-│   │   ├── data/                 # JSON data files
-│   │   └── js/                   # JavaScript files
-│   └── Program.cs                # Application entry point
-├── package.json                  # npm dependencies
-└── README.md
-```
-
-## Features
-
-- ✅ Real-time data updates
-- ✅ Responsive grid layout
-- ✅ Color-coded profit/loss indicators
-- ✅ Currency and percentage formatting
-- ✅ Clean, modern UI
-- ✅ Bootstrap integration
-- 🚧 Advanced filtering (coming soon)
-- 🚧 Column sorting (coming soon)
-- 🚧 Export functionality (coming soon)
 
 ## License
 
@@ -120,6 +161,9 @@ This project is licensed under the MIT License.
 
 ## Related Projects
 
-- [Angular Grid Examples](https://github.com/IgniteUI/angular-grid-examples) - The Angular version this project is based on
+- [Angular Grid Examples](https://github.com/IgniteUI/angular-grid-examples) - The Angular version this project mirrors
 - [Ignite UI for Blazor](https://www.infragistics.com/products/ignite-ui-blazor) - Official Ignite UI Blazor components
 
+## Note
+
+This project uses `IgniteUI.Blazor.Trial` package which includes trial watermark overlay. Commercial license required for production use.
