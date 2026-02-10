@@ -4,6 +4,7 @@
   </Folder>
   <Folder Name="/src/samples/">
     <Project Path="src/samples/ERPInventory/ERPInventory.csproj" />
+    <Project Path="src/samples/FinanceGrid.Library/FinanceGrid.Library.csproj" />
     <Project Path="src/samples/FinanceGrid/FinanceGrid.csproj" />
     <Project Path="src/samples/FleetManagement/FleetManagement.csproj" />
     <Project Path="src/samples/HRPortal/HRPortal.csproj" />

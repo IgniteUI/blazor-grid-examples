@@ -10,4 +10,8 @@
     <PackageReference Include="IgniteUI.Blazor.Trial" Version="25.2.38" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\samples\FinanceGrid.Library\FinanceGrid.Library.csproj" />
+  </ItemGroup>
+
 </Project>

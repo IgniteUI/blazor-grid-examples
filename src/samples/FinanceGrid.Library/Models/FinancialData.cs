@@ -1,4 +1,4 @@
-namespace BlazorGridExamples.Models;
+namespace FinanceGrid.Library.Models;
 
 public class FinancialData
 {

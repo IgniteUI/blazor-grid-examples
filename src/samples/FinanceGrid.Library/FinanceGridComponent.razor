@@ -1,11 +1,8 @@
-@page "/finance-grid"
-@using BlazorGridExamples.Services
-@using BlazorGridExamples.Models
+@using FinanceGrid.Library.Services
+@using FinanceGrid.Library.Models
+@using IgniteUI.Blazor.Controls
 @inject FinancialService FinancialService
 @implements IDisposable
-@rendermode InteractiveServer
-
-<PageTitle>Financial Portfolio - Blazor Grid Examples</PageTitle>
 
 <div class="container-fluid p-4">
     @if (isLoading)

@@ -1,33 +1,31 @@
 using System.Text.Json;
-using BlazorGridExamples.Models;
+using FinanceGrid.Library.Models;
 
-namespace BlazorGridExamples.Services;
+namespace FinanceGrid.Library.Services;
 
 public class FinancialService
 {
-    private readonly IWebHostEnvironment _environment;
-    private const string DataUrl = "data/finance.json";  // Relative to wwwroot
+    private readonly HttpClient _httpClient;
+    private const string DataUrl = "_content/FinanceGrid.Library/data/finance.json";
+
+    private static readonly JsonSerializerOptions options = new()
+    {
+        PropertyNameCaseInsensitive = true
+    };
 
     public List<FinancialData> Data { get; private set; } = new();
     public event Action? OnDataChanged;
 
-    public FinancialService(IWebHostEnvironment environment)
+    public FinancialService(HttpClient httpClient)
     {
-        _environment = environment;
+        _httpClient = httpClient;
     }
 
     public async Task LoadDataAsync()
     {
         try
         {
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
-
-            // Load from wwwroot using IWebHostEnvironment for reliable path resolution
-            var filePath = Path.Combine(_environment.WebRootPath, DataUrl);
-            var jsonText = await File.ReadAllTextAsync(filePath);
+            var jsonText = await _httpClient.GetStringAsync(DataUrl);
             Data = JsonSerializer.Deserialize<List<FinancialData>>(jsonText, options) ?? new();
             
             // Calculate derived fields

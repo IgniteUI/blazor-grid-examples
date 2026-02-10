@@ -1,15 +1,22 @@
 ﻿@page "/"
 @page "/{SampleKey}"
+@using FinanceGrid.Library
 
 <PageTitle>Blazor Grid Examples</PageTitle>
 
 <TabNavigation>
-    @if (!string.IsNullOrEmpty(SampleKey))
+    @if (SampleKey == "finance-grid")
     {
-        <iframe src="@GetSampleUrl()" 
-                style="width: 100%; height: 100%; border: none;" 
-                title="@SampleKey">
-        </iframe>
+        <FinanceGridComponent />
+    }
+    else if (!string.IsNullOrEmpty(SampleKey))
+    {
+        <div class="container py-5">
+            <div class="alert alert-info">
+                <h4>Sample: @SampleKey</h4>
+                <p>This sample is coming soon.</p>
+            </div>
+        </div>
     }
     else
     {
@@ -90,19 +97,4 @@
 @code {
     [Parameter]
     public string? SampleKey { get; set; }
-
-    private string GetSampleUrl()
-    {
-        var port = SampleKey switch
-        {
-            "finance-grid" => "5001",
-            "sales-grid" => "5002",
-            "hr-portal" => "5003",
-            "erp-hgrid" => "5004",
-            "fleet-management" => "5005",
-            _ => "5001"
-        };
-
-        return $"http://localhost:{port}";
-    }
 }
