@@ -33,6 +33,7 @@ app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+    .AddInteractiveServerRenderMode()
+    .AddAdditionalAssemblies(typeof(FinanceGrid.Library.FinanceGridComponent).Assembly);
 
 app.Run();

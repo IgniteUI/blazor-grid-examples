@@ -7,7 +7,7 @@
 <TabNavigation>
     @if (SampleKey == "finance-grid")
     {
-        <FinanceGridComponent />
+        <FinanceGridComponent @rendermode="InteractiveServer" />
     }
     else if (!string.IsNullOrEmpty(SampleKey))
     {
