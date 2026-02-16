@@ -96,6 +96,7 @@ A Blazor example displaying a financial portfolio with live market data simulati
 - Color-coded profit/loss indicators
 - Sortable and filterable columns
 - Currency and percentage formatting
+- Uses Infragistics data endpoint: https://www.infragistics.com/grid-examples-data/data/finance/finance.json
 
 **Technologies:** IgbGrid, IgniteUI.Blazor.Trial, Blazor Server
 
@@ -154,6 +155,14 @@ Individual samples can be downloaded directly from the navigation application us
 - **IgniteUI.Blazor.Trial** - v25.2.38
 - **Bootstrap 5** - UI Framework
 - **C#** - Backend logic and services
+
+## Data Sources
+
+All samples use the same data endpoints as the Angular grid examples from https://www.infragistics.com/grid-examples-data. This ensures consistency between Blazor and Angular implementations.
+
+Example endpoints:
+- Finance: https://www.infragistics.com/grid-examples-data/data/finance/finance.json
+- More endpoints will be added as samples are implemented
 
 ## License
 

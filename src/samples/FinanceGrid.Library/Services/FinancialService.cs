@@ -6,7 +6,7 @@ namespace FinanceGrid.Library.Services;
 public class FinancialService
 {
     private readonly HttpClient _httpClient;
-    private const string DataUrl = "_content/FinanceGrid.Library/data/finance.json";
+    private const string DataUrl = "https://www.infragistics.com/grid-examples-data/data/finance/finance.json";
 
     private static readonly JsonSerializerOptions options = new()
     {
@@ -55,9 +55,9 @@ public class FinancialService
 
             OnDataChanged?.Invoke();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            Console.WriteLine($"Error loading data: {ex.Message}");
+            // Failed to load data - Data list remains empty
         }
     }
 

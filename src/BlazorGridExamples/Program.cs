@@ -11,11 +11,8 @@ builder.Services.AddRazorComponents()
 // Register IgniteUI Blazor
 builder.Services.AddIgniteUIBlazor();
 
-// Register HttpClient for RCL services
-builder.Services.AddHttpClient<FinancialService>(client => 
-{
-    client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("BaseAddress") ?? "http://localhost:5000");
-});
+// Register HttpClient for RCL services (using Infragistics data endpoint)
+builder.Services.AddHttpClient<FinancialService>();
 
 // Register custom services
 builder.Services.AddScoped<FinancialService>();
