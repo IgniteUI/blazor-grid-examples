@@ -14,7 +14,7 @@ public class FinancialData
     public PriceValue? Value { get; set; }
     
     [JsonPropertyName("positions")]
-    public int Positions { get; set; }
+    public double Positions { get; set; }
     
     [JsonPropertyName("profitLossValue")]
     public double ProfitLossValue { get; set; }

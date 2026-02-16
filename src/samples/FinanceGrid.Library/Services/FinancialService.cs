@@ -78,13 +78,13 @@ public class FinancialService
         OnDataChanged?.Invoke();
     }
 
-    private double CalculateProfitLossValue(double currentPrice, double boughtPrice, int positions)
+    private double CalculateProfitLossValue(double currentPrice, double boughtPrice, double positions)
     {
         var profitLossValue = (currentPrice - boughtPrice) * positions;
         return Math.Round(profitLossValue, 2);
     }
 
-    private double CalculateProfitLossPercentage(double profitLossValue, double boughtPrice, int positions)
+    private double CalculateProfitLossPercentage(double profitLossValue, double boughtPrice, double positions)
     {
         var totalInitialInvestment = boughtPrice * positions;
         var profitLossPercentage = profitLossValue / totalInitialInvestment;
