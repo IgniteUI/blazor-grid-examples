@@ -1,5 +1,5 @@
 using FinanceGrid.Components;
-using FinanceGrid.Services;
+using FinanceGrid.Library.Services;
 using IgniteUI.Blazor.Controls;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +10,9 @@ builder.Services.AddRazorComponents()
 
 // Register IgniteUI Blazor
 builder.Services.AddIgniteUIBlazor();
+
+// Register HttpClient for FinancialService
+builder.Services.AddHttpClient<FinancialService>();
 
 // Register custom services
 builder.Services.AddScoped<FinancialService>();
@@ -26,6 +29,7 @@ app.UseAntiforgery();
 app.UseStaticFiles();
 
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+    .AddInteractiveServerRenderMode()
+    .AddAdditionalAssemblies(typeof(FinanceGrid.Library.FinanceGridComponent).Assembly);
 
 app.Run();
