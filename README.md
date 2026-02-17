@@ -101,34 +101,77 @@ A Blazor example displaying a financial portfolio with live market data simulati
 **Technologies:** IgbGrid, IgniteUI.Blazor.Trial, Blazor Server
 
 ### 2. Sales Dashboard
-**Port:** 5002 | **Status:** 🚧 Planned
+**Port:** 5002 | **Status:** ✅ Implemented
 
-Sales app example with summaries by region, product, and time periods.
+A Blazor example displaying sales data with live updates. Features:
+- IgbGrid component with 10 columns (Product, Sales Person, Amount, Value, Discount, Profit, Status, Region, Date)
+- Real-time data updates every 3 seconds
+- Sortable and filterable columns
+- Currency and percentage formatting
+- Uses Infragistics data endpoint: https://www.infragistics.com/grid-examples-data/data/sales/sales.json
 
-**Technologies:** IgbPivotGrid (Planned)
+**Technologies:** IgbGrid, IgniteUI.Blazor.Trial, Blazor Server
 
 ### 3. HR Portal
-**Port:** 5003 | **Status:** 🚧 Planned
+**Port:** 5003 | **Status:** ✅ Implemented
 
-Example featuring employee information management.
+Example featuring employee information management with live performance tracking. Features:
+- IgbGrid component with 10 columns (Name, Title, Department, Salary, Hire Date, Status, Manager, Location, Performance)
+- Real-time performance score updates
+- Sortable and filterable columns
+- Date and number formatting
+- Uses Infragistics data endpoint: https://www.infragistics.com/grid-examples-data/data/hr/hr.json
 
-**Technologies:** IgbTreeGrid (Planned)
+**Technologies:** IgbGrid, IgniteUI.Blazor.Trial, Blazor Server
 
 ### 4. ERP/Inventory
-**Port:** 5004 | **Status:** 🚧 Planned
+**Port:** 5004 | **Status:** ✅ Implemented
 
-Sample app for ERP/Inventory handling large data volumes.
+Sample app for ERP/Inventory handling with real-time stock level monitoring. Features:
+- IgbGrid component with 10 columns (Product Name, Category, SKU, Quantity, Unit Price, Total Value, Supplier, Warehouse, Status)
+- Real-time quantity updates
+- Automatic total value calculations
+- Sortable and filterable columns
+- Uses Infragistics data endpoint: https://www.infragistics.com/grid-examples-data/data/inventory/inventory.json
 
-**Technologies:** IgbHierarchicalGrid (Planned)
+**Technologies:** IgbGrid, IgniteUI.Blazor.Trial, Blazor Server
 
 ### 5. Fleet Management
-**Port:** 5005 | **Status:** 🚧 Planned
+**Port:** 5005 | **Status:** ✅ Implemented
 
-Sample app for managing vehicle acquisition, operations, and maintenance.
+Sample app for managing vehicle fleet with real-time tracking. Features:
+- IgbGrid component with 10 columns (Vehicle ID, Make, Model, Year, Mileage, Fuel Level, Status, Driver, Location)
+- Real-time mileage and fuel level updates
+- Sortable and filterable columns
+- Date and number formatting
+- Uses Infragistics data endpoint: https://www.infragistics.com/grid-examples-data/data/fleet/fleet.json
 
-**Technologies:** IgbGrid with Master-Detail (Planned)
+**Technologies:** IgbGrid, IgniteUI.Blazor.Trial, Blazor Server
 
 ## Project Architecture
+
+### RCL (Razor Class Library) Architecture
+Each sample follows a modular RCL architecture pattern:
+
+**Library Projects (RCL):**
+- `{SampleName}.Library/` - Reusable Razor Class Library containing:
+  - `Models/` - Data models with JsonPropertyName attributes
+  - `Services/` - HttpClient-based data services with live update logic
+  - `{SampleName}Component.razor` - Main grid component
+  - Dependencies: IgniteUI.Blazor.Trial, Microsoft.AspNetCore.Components.Web
+
+**Standalone Projects:**
+- `{SampleName}/` - Blazor Server application that:
+  - References the RCL
+  - Registers services and HttpClient
+  - Hosts the component on the home page
+  - Can be run independently or downloaded
+
+**Benefits:**
+- Component reusability across projects
+- Clean separation of concerns
+- Easy distribution and deployment
+- Independent testing and development
 
 ### Main Navigation Application
 The main application (`src/BlazorGridExamples`) provides:
@@ -160,9 +203,12 @@ Individual samples can be downloaded directly from the navigation application us
 
 All samples use the same data endpoints as the Angular grid examples from https://www.infragistics.com/grid-examples-data. This ensures consistency between Blazor and Angular implementations.
 
-Example endpoints:
+Data endpoints:
 - Finance: https://www.infragistics.com/grid-examples-data/data/finance/finance.json
-- More endpoints will be added as samples are implemented
+- Sales: https://www.infragistics.com/grid-examples-data/data/sales/sales.json
+- HR: https://www.infragistics.com/grid-examples-data/data/hr/hr.json
+- Inventory: https://www.infragistics.com/grid-examples-data/data/inventory/inventory.json
+- Fleet: https://www.infragistics.com/grid-examples-data/data/fleet/fleet.json
 
 ## License
 
