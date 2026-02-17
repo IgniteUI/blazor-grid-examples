@@ -17,7 +17,7 @@ public class InventoryData
     public string? Sku { get; set; }
     
     [JsonPropertyName("quantity")]
-    public double Quantity { get; set; }
+    public int Quantity { get; set; }
     
     [JsonPropertyName("unitPrice")]
     public double UnitPrice { get; set; }

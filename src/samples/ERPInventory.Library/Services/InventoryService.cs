@@ -56,8 +56,8 @@ public class InventoryService
             }
 
             var changeAmount = dataRow.Quantity * changePercent;
-            dataRow.Quantity = Math.Max(0, dataRow.Quantity + changeAmount);
-            dataRow.Quantity = Math.Round(dataRow.Quantity, 0);
+            var newQuantity = dataRow.Quantity + (int)Math.Round(changeAmount);
+            dataRow.Quantity = Math.Max(0, newQuantity);
             
             dataRow.TotalValue = Math.Round(dataRow.Quantity * dataRow.UnitPrice, 2);
             dataRow.LastUpdated = DateTime.Now;
