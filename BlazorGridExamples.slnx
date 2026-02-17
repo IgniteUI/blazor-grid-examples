@@ -3,11 +3,15 @@
     <Project Path="src/BlazorGridExamples/BlazorGridExamples.csproj" />
   </Folder>
   <Folder Name="/src/samples/">
+    <Project Path="src/samples/ERPInventory.Library/ERPInventory.Library.csproj" />
     <Project Path="src/samples/ERPInventory/ERPInventory.csproj" />
     <Project Path="src/samples/FinanceGrid.Library/FinanceGrid.Library.csproj" />
     <Project Path="src/samples/FinanceGrid/FinanceGrid.csproj" />
+    <Project Path="src/samples/FleetManagement.Library/FleetManagement.Library.csproj" />
     <Project Path="src/samples/FleetManagement/FleetManagement.csproj" />
+    <Project Path="src/samples/HRPortal.Library/HRPortal.Library.csproj" />
     <Project Path="src/samples/HRPortal/HRPortal.csproj" />
+    <Project Path="src/samples/SalesGrid.Library/SalesGrid.Library.csproj" />
     <Project Path="src/samples/SalesGrid/SalesGrid.csproj" />
   </Folder>
 </Solution>

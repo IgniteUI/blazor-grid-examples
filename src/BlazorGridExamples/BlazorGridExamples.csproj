@@ -12,6 +12,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\samples\FinanceGrid.Library\FinanceGrid.Library.csproj" />
+    <ProjectReference Include="..\samples\SalesGrid.Library\SalesGrid.Library.csproj" />
+    <ProjectReference Include="..\samples\HRPortal.Library\HRPortal.Library.csproj" />
+    <ProjectReference Include="..\samples\ERPInventory.Library\ERPInventory.Library.csproj" />
+    <ProjectReference Include="..\samples\FleetManagement.Library\FleetManagement.Library.csproj" />
   </ItemGroup>
 
 </Project>

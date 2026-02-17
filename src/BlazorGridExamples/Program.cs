@@ -1,5 +1,9 @@
 using BlazorGridExamples.Components;
 using FinanceGrid.Library.Services;
+using SalesGrid.Library.Services;
+using HRPortal.Library.Services;
+using ERPInventory.Library.Services;
+using FleetManagement.Library.Services;
 using IgniteUI.Blazor.Controls;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,11 +15,19 @@ builder.Services.AddRazorComponents()
 // Register IgniteUI Blazor
 builder.Services.AddIgniteUIBlazor();
 
-// Register HttpClient for RCL services (using Infragistics data endpoint)
+// Register HttpClient for all RCL services
 builder.Services.AddHttpClient<FinancialService>();
+builder.Services.AddHttpClient<SalesService>();
+builder.Services.AddHttpClient<HRService>();
+builder.Services.AddHttpClient<InventoryService>();
+builder.Services.AddHttpClient<FleetService>();
 
 // Register custom services
 builder.Services.AddScoped<FinancialService>();
+builder.Services.AddScoped<SalesService>();
+builder.Services.AddScoped<HRService>();
+builder.Services.AddScoped<InventoryService>();
+builder.Services.AddScoped<FleetService>();
 
 var app = builder.Build();
 
@@ -34,6 +46,12 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
-    .AddAdditionalAssemblies(typeof(FinanceGrid.Library.FinanceGridComponent).Assembly);
+    .AddAdditionalAssemblies(
+        typeof(FinanceGrid.Library.FinanceGridComponent).Assembly,
+        typeof(SalesGrid.Library.SalesGridComponent).Assembly,
+        typeof(HRPortal.Library.HRPortalComponent).Assembly,
+        typeof(ERPInventory.Library.ERPInventoryComponent).Assembly,
+        typeof(FleetManagement.Library.FleetManagementComponent).Assembly
+    );
 
 app.Run();

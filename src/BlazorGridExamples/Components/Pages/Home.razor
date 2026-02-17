@@ -1,6 +1,10 @@
 ﻿@page "/"
 @page "/{SampleKey}"
 @using FinanceGrid.Library
+@using SalesGrid.Library
+@using HRPortal.Library
+@using ERPInventory.Library
+@using FleetManagement.Library
 
 <PageTitle>Blazor Grid Examples</PageTitle>
 
@@ -8,6 +12,22 @@
     @if (SampleKey == "finance-grid")
     {
         <FinanceGridComponent @rendermode="InteractiveServer" />
+    }
+    else if (SampleKey == "sales-grid")
+    {
+        <SalesGridComponent @rendermode="InteractiveServer" />
+    }
+    else if (SampleKey == "hr-portal")
+    {
+        <HRPortalComponent @rendermode="InteractiveServer" />
+    }
+    else if (SampleKey == "erp-hgrid")
+    {
+        <ERPInventoryComponent @rendermode="InteractiveServer" />
+    }
+    else if (SampleKey == "fleet-management")
+    {
+        <FleetManagementComponent @rendermode="InteractiveServer" />
     }
     else if (!string.IsNullOrEmpty(SampleKey))
     {

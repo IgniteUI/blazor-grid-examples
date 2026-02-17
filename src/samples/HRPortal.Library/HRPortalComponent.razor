@@ -1,0 +1,87 @@
+@using HRPortal.Library.Services
+@using HRPortal.Library.Models
+@using IgniteUI.Blazor.Controls
+@inject HRService HRService
+@implements IDisposable
+
+<div class="container-fluid p-4">
+    @if (isLoading)
+    {
+        <div class="text-center my-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-3">Loading employee data...</p>
+        </div>
+    }
+    else if (!HRService.Data.Any())
+    {
+        <div class="alert alert-warning" role="alert">
+            No data available. Please check your connection.
+        </div>
+    }
+    else
+    {
+        <IgbGrid Data="HRService.Data" 
+                 AutoGenerate="false"
+                 AllowFiltering="true"
+                 Height="calc(100vh - 200px)"
+                 @ref="grid">
+            <IgbColumn Field="Id" Header="ID" Width="5%" MinWidth="60px"></IgbColumn>
+            <IgbColumn Field="Name" Header="Employee Name" Width="15%" MinWidth="140px" Sortable="true"></IgbColumn>
+            <IgbColumn Field="Title" Header="Title" Width="15%" MinWidth="120px" Sortable="true"></IgbColumn>
+            <IgbColumn Field="Department" Header="Department" Width="12%" MinWidth="110px"></IgbColumn>
+            <IgbColumn Field="Salary" Header="Salary" DataType="GridColumnDataType.Number" Width="10%" MinWidth="90px"></IgbColumn>
+            <IgbColumn Field="HireDate" Header="Hire Date" DataType="GridColumnDataType.Date" Width="10%" MinWidth="100px"></IgbColumn>
+            <IgbColumn Field="Status" Header="Status" Width="8%" MinWidth="80px"></IgbColumn>
+            <IgbColumn Field="Manager" Header="Manager" Width="12%" MinWidth="110px"></IgbColumn>
+            <IgbColumn Field="Location" Header="Location" Width="10%" MinWidth="90px"></IgbColumn>
+            <IgbColumn Field="Performance" Header="Performance" DataType="GridColumnDataType.Number" Width="8%" MinWidth="95px"></IgbColumn>
+        </IgbGrid>
+        <div class="mt-3">
+            <small class="text-muted">
+                <i class="bi bi-info-circle"></i> Data updates every 3 seconds to simulate live HR data
+            </small>
+        </div>
+    }
+</div>
+
+@code {
+    private bool isLoading = true;
+    private System.Timers.Timer? updateTimer;
+    private IgbGrid? grid;
+
+    protected override async Task OnInitializedAsync()
+    {
+        HRService.OnDataChanged += OnDataChanged;
+        await HRService.LoadDataAsync();
+        isLoading = false;
+
+        // Start auto-update timer (every 3 seconds)
+        updateTimer = new System.Timers.Timer(3000);
+        updateTimer.Elapsed += (sender, args) =>
+        {
+            HRService.UpdateAllData();
+        };
+        updateTimer.Start();
+    }
+
+    private void OnDataChanged()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+            if (grid != null)
+            {
+                grid.MarkForCheck();
+            }
+        });
+    }
+
+    public void Dispose()
+    {
+        updateTimer?.Stop();
+        updateTimer?.Dispose();
+        HRService.OnDataChanged -= OnDataChanged;
+    }
+}
