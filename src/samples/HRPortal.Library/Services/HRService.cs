@@ -49,9 +49,13 @@ public class HRService
                 changePercent -= 2 * volatility;
             }
 
-            var changeAmount = dataRow.Performance * changePercent;
-            dataRow.Performance = Math.Max(0, Math.Min(5.0, dataRow.Performance + changeAmount));
-            dataRow.Performance = Math.Round(dataRow.Performance, 2);
+            // Ensure dataRow.Performance is not null before performing calculations
+            if (dataRow.Performance.HasValue)
+            {
+                var changeAmount = dataRow.Performance.Value * changePercent;
+                dataRow.Performance = Math.Max(0.0, Math.Min(5.0, dataRow.Performance.Value + changeAmount));
+                dataRow.Performance = Math.Round(dataRow.Performance.Value, 2);
+            }
         }
 
         OnDataChanged?.Invoke();

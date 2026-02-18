@@ -6,7 +6,12 @@ namespace FleetManagement.Library.Services;
 public class FleetService
 {
     private readonly HttpClient _httpClient;
-    private const string DataUrl = "https://www.infragistics.com/grid-examples-data/data/fleet/fleet.json";
+    private const string VehicleDataUrl = "https://www.infragistics.com/grid-examples-data/data/fleet/vehicles.json";
+    private const string DriversDataUrl = "https://www.infragistics.com/grid-examples-data/data/fleet/drivers.json";
+    private const string CostDataUrl = "https://www.infragistics.com/grid-examples-data/data/fleet/cost.json";
+    private const string MaintanenceDataUrl = "https://www.infragistics.com/grid-examples-data/data/fleet/maintenance.json";
+    private const string UtilizationDataUrl = "https://www.infragistics.com/grid-examples-data/data/fleet/utilization.json";
+    private const string TripHistoryDataUrl = "https://www.infragistics.com/grid-examples-data/data/fleet/trip_history.json";
 
     private static readonly JsonSerializerOptions options = new()
     {
@@ -25,7 +30,7 @@ public class FleetService
     {
         try
         {
-            var jsonText = await _httpClient.GetStringAsync(DataUrl);
+            var jsonText = await _httpClient.GetStringAsync(VehicleDataUrl);
             Data = JsonSerializer.Deserialize<List<FleetData>>(jsonText, options) ?? new();
 
             OnDataChanged?.Invoke();

@@ -6,7 +6,7 @@ namespace ERPInventory.Library.Services;
 public class InventoryService
 {
     private readonly HttpClient _httpClient;
-    private const string DataUrl = "https://www.infragistics.com/grid-examples-data/data/inventory/inventory.json";
+    private const string DataUrl = "https://www.infragistics.com/grid-examples-data/data/erp/products.json";
 
     private static readonly JsonSerializerOptions options = new()
     {

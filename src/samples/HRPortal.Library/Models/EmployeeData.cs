@@ -4,33 +4,33 @@ namespace HRPortal.Library.Models;
 
 public class EmployeeData
 {
-    [JsonPropertyName("id")]
-    public string? Id { get; set; }
+    [JsonPropertyName("ID")]
+    public int? Id { get; set; }
     
-    [JsonPropertyName("name")]
+    [JsonPropertyName("Name")]
     public string? Name { get; set; }
     
-    [JsonPropertyName("title")]
+    [JsonPropertyName("JobTitle")]
     public string? Title { get; set; }
     
-    [JsonPropertyName("department")]
+    [JsonPropertyName("Department")]
     public string? Department { get; set; }
     
-    [JsonPropertyName("salary")]
+    [JsonPropertyName("GrossSalary")]
     public double Salary { get; set; }
     
-    [JsonPropertyName("hireDate")]
+    [JsonPropertyName("HireDate")]
     public DateTime HireDate { get; set; }
     
-    [JsonPropertyName("status")]
+    [JsonPropertyName("Status")]
     public string? Status { get; set; }
     
-    [JsonPropertyName("manager")]
+    [JsonPropertyName("Manager")]
     public string? Manager { get; set; }
     
-    [JsonPropertyName("location")]
+    [JsonPropertyName("Location")]
     public string? Location { get; set; }
     
-    [JsonPropertyName("performance")]
-    public double Performance { get; set; }
+    [JsonPropertyName("Performance")]
+    public double? Performance { get; set; }
 }
