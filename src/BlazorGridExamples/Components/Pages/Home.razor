@@ -5,6 +5,7 @@
 @using HRPortal.Library
 @using ERPInventory.Library
 @using FleetManagement.Library
+@inject NavigationManager NavigationManager
 
 <PageTitle>Blazor Grid Examples</PageTitle>
 
@@ -29,92 +30,17 @@
     {
         <FleetManagementComponent @rendermode="InteractiveServer" />
     }
-    else if (!string.IsNullOrEmpty(SampleKey))
-    {
-        <div class="container py-5">
-            <div class="alert alert-info">
-                <h4>Sample: @SampleKey</h4>
-                <p>This sample is coming soon.</p>
-            </div>
-        </div>
-    }
-    else
-    {
-        <div class="landing-page">
-            <div class="container py-5">
-                <h1 class="display-4 mb-4">Blazor Grid Examples</h1>
-                <p class="lead mb-5">
-                    Discover Blazor examples created with Ignite UI for Blazor. Explore advanced data grids,
-                    see real implementations, and learn best practices you can apply to your own apps.
-                </p>
-
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="card h-100 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Financial Portfolio</h5>
-                                <p class="card-text">
-                                    An example app showing assets, profit, and loss analyses with dynamic charts and a high-performance Data Grid.
-                                </p>
-                                <a href="/finance-grid" class="btn btn-primary">View Example</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="card h-100 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Sales Dashboard</h5>
-                                <p class="card-text">
-                                    Sales app example with summaries by region, product, and time periods using Pivot Grid.
-                                </p>
-                                <a href="/sales-grid" class="btn btn-primary">View Example</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="card h-100 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">HR Portal</h5>
-                                <p class="card-text">
-                                    Example featuring a Tree Grid to manage and display employee information.
-                                </p>
-                                <a href="/hr-portal" class="btn btn-primary">View Example</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="card h-100 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">ERP/Inventory</h5>
-                                <p class="card-text">
-                                    Sample app for ERP/Inventory handling large data volumes using Hierarchical Grid.
-                                </p>
-                                <a href="/erp-inventory" class="btn btn-primary">View Example</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="card h-100 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Fleet Management</h5>
-                                <p class="card-text">
-                                    Sample app with a Master-Detail Grid for managing vehicle acquisition, operations, and maintenance.
-                                </p>
-                                <a href="/fleet-management" class="btn btn-primary">View Example</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
 </TabNavigation>
 
 @code {
     [Parameter]
     public string? SampleKey { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (string.IsNullOrEmpty(SampleKey))
+        {
+            NavigationManager.NavigateTo("/finance-grid");
+        }
+    }
 }
