@@ -5,13 +5,13 @@
         <div class="tab-container">
             @foreach (var tab in Tabs)
             {
-                <div class="tab-item-container" @onclick="() => NavigateToSample(tab.Key)">
+                <button type="button" class="tab-item-container" @onclick="() => NavigateToSample(tab.Key)">
                     <div class="tab-item @(IsActive(tab.Key) ? "tab-item--selected" : "")">
                         <div class="tab-header">
                             @tab.Title.ToUpper()
                         </div>
                     </div>
-                </div>
+                </button>
             }
         </div>
 
