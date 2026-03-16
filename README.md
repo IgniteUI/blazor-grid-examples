@@ -174,23 +174,25 @@ Each sample follows a modular RCL architecture pattern:
 - Independent testing and development
 
 ### Main Navigation Application
-The main application (`src/BlazorGridExamples`) provides:
+The main application (`src/BlazorGridExamples`) currently provides:
 - Horizontal tab navigation matching Angular examples
-- Sample information display with Download button
+- Sample information display
 - Theme/Mode switcher
+
+Planned enhancements (not yet implemented in the UI):
+- Download button for each sample
 - Fullscreen toggle
 - iframe-based hosting of sample applications
 
 ### Sample Projects
 Each sample is a standalone Blazor Server project that can be:
-- Downloaded individually
 - Run independently
 - Modified without affecting other samples
 - Deployed separately
 
 ## Download Samples
 
-Individual samples can be downloaded directly from the navigation application using the Download button in each sample's info bar.
+Support for downloading individual samples directly from the navigation application is planned but not yet implemented. For now, you can clone this repository and run each sample project from the `src/samples` folder.
 
 ## Technology Stack
 
