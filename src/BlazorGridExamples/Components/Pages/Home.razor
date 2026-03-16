@@ -1,5 +1,6 @@
 ﻿@page "/"
 @page "/{SampleKey}"
+@rendermode InteractiveServer
 @using FinanceGrid.Library
 @using SalesGrid.Library
 @using HRPortal.Library
@@ -12,23 +13,23 @@
 <TabNavigation>
     @if (SampleKey == "finance-grid")
     {
-        <FinanceGridComponent @rendermode="InteractiveServer" />
+        <FinanceGridComponent />
     }
     else if (SampleKey == "sales-grid")
     {
-        <SalesGridComponent @rendermode="InteractiveServer" />
+        <SalesGridComponent />
     }
     else if (SampleKey == "hr-portal")
     {
-        <HRPortalComponent @rendermode="InteractiveServer" />
+        <HRPortalComponent />
     }
     else if (SampleKey == "erp-inventory")
     {
-        <ERPInventoryComponent @rendermode="InteractiveServer" />
+        <ERPInventoryComponent />
     }
     else if (SampleKey == "fleet-management")
     {
-        <FleetManagementComponent @rendermode="InteractiveServer" />
+        <FleetManagementComponent />
     }
 </TabNavigation>
 

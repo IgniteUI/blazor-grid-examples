@@ -205,9 +205,21 @@ main {
     z-index: 1000;
 }
 
-    #blazor-error-ui .dismiss {
-        cursor: pointer;
-        position: absolute;
-        right: 0.75rem;
-        top: 0.5rem;
-    }
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+html {
+    height: 100%;
+    box-sizing: border-box
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    min-width: 1100px
+}
