@@ -22,13 +22,6 @@ builder.Services.AddHttpClient<HRService>();
 builder.Services.AddHttpClient<InventoryService>();
 builder.Services.AddHttpClient<FleetService>();
 
-// Register custom services
-builder.Services.AddScoped<FinancialService>();
-builder.Services.AddScoped<SalesService>();
-builder.Services.AddScoped<HRService>();
-builder.Services.AddScoped<InventoryService>();
-builder.Services.AddScoped<FleetService>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
