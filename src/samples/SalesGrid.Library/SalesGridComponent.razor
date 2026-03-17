@@ -67,10 +67,6 @@
     {
         SalesService.OnDataChanged += OnDataChanged;
         await SalesService.LoadDataAsync();
-
-        // Configure pivot grid
-        ConfigurePivotGrid();
-
         isLoading = false;
     }
 
@@ -78,6 +74,10 @@
     {
         if (firstRender)
         {
+            // Configure pivot grid after components are rendered
+            ConfigurePivotGrid();
+            StateHasChanged();
+
             // Start auto-update timer (every 3 seconds)
             updateTimer = new System.Timers.Timer(3000);
             updateTimer.Elapsed += (sender, args) =>
