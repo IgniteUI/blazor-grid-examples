@@ -22,22 +22,55 @@
     }
     else
     {
-        <IgbGrid Data="InventoryService.Data" 
-                 AutoGenerate="false"
-                 AllowFiltering="true"
-                 Height="calc(100vh - 200px)"
-                 @ref="grid">
-            <IgbColumn Field="Id" Header="ID" Width="5%" MinWidth="60px"></IgbColumn>
-            <IgbColumn Field="ProductName" Header="Product" Width="15%" MinWidth="130px" Sortable="true"></IgbColumn>
-            <IgbColumn Field="Category" Header="Category" Width="12%" MinWidth="100px"></IgbColumn>
-            <IgbColumn Field="Sku" Header="SKU" Width="10%" MinWidth="90px"></IgbColumn>
-            <IgbColumn Field="Quantity" Header="Quantity" DataType="GridColumnDataType.Number" Width="8%" MinWidth="85px"></IgbColumn>
-            <IgbColumn Field="UnitPrice" Header="Unit Price" DataType="GridColumnDataType.Number" Width="10%" MinWidth="95px"></IgbColumn>
-            <IgbColumn Field="TotalValue" Header="Total Value" DataType="GridColumnDataType.Number" Width="10%" MinWidth="100px"></IgbColumn>
-            <IgbColumn Field="Supplier" Header="Supplier" Width="12%" MinWidth="110px"></IgbColumn>
-            <IgbColumn Field="Warehouse" Header="Warehouse" Width="10%" MinWidth="100px"></IgbColumn>
-            <IgbColumn Field="Status" Header="Status" Width="8%" MinWidth="80px"></IgbColumn>
-        </IgbGrid>
+        <IgbHierarchicalGrid Data="InventoryService.Data"
+                             PrimaryKey="Sku"
+                             AutoGenerate="false"
+                             AllowFiltering="true"
+                             RowSelection="GridSelectionMode.Multiple"
+                             Height="calc(100vh - 200px)"
+                             @ref="grid">
+
+            <IgbGridToolbar>
+                <IgbGridToolbarTitle>Inventory</IgbGridToolbarTitle>
+                <IgbGridToolbarActions>
+                    <IgbGridToolbarHiding />
+                    <IgbGridToolbarPinning />
+                </IgbGridToolbarActions>
+            </IgbGridToolbar>
+
+            <IgbColumn Field="Sku" Header="SKU" Sortable="true" DataType="GridColumnDataType.String" Width="10%" MinWidth="100px"></IgbColumn>
+            <IgbColumn Field="ProductName" Header="Product Name" Sortable="true" Width="20%" MinWidth="150px"></IgbColumn>
+            <IgbColumn Field="Category" Header="Category" Sortable="true" DataType="GridColumnDataType.String" Width="15%" MinWidth="120px"></IgbColumn>
+            <IgbColumn Field="Rating" Header="Rating" Sortable="true" DataType="GridColumnDataType.Number" Width="10%" MinWidth="80px"></IgbColumn>
+            <IgbColumn Field="UnitsSold" Header="Units Sold" Sortable="true" DataType="GridColumnDataType.Number" Width="12%" MinWidth="110px"></IgbColumn>
+            <IgbColumn Field="GrossPrice" Header="Gross Price" Sortable="true" DataType="GridColumnDataType.Currency" Width="12%" MinWidth="110px"></IgbColumn>
+            <IgbColumn Field="NetPrice" Header="Net Price" Sortable="true" DataType="GridColumnDataType.Currency" Width="10%" MinWidth="100px"></IgbColumn>
+            <IgbColumn Field="TotalNetProfit" Header="Net Profit" Sortable="true" DataType="GridColumnDataType.Currency" Width="11%" MinWidth="110px"></IgbColumn>
+
+            <IgbRowIsland ChildDataKey="Orders" PrimaryKey="OrderId" AutoGenerate="false" AllowFiltering="true" RowSelection="GridSelectionMode.Multiple">
+                <IgbGridToolbar>
+                    <IgbGridToolbarTitle>Sales data for the last month</IgbGridToolbarTitle>
+                </IgbGridToolbar>
+
+                <IgbColumn Field="OrderId" Header="Order ID" DataType="GridColumnDataType.Number" Width="10%" MinWidth="90px" Sortable="true"></IgbColumn>
+                <IgbColumn Field="Status" Header="Status" Width="12%" MinWidth="100px" Sortable="true"></IgbColumn>
+
+                <IgbColumnGroup Header="Delivery" Collapsible="true">
+                    <IgbColumn Field="Delivery.DateOrdered" Header="Date Ordered" DataType="GridColumnDataType.Date" Sortable="true" Width="13%" MinWidth="130px" VisibleWhenCollapsed="true"></IgbColumn>
+                    <IgbColumn Field="Delivery.DateShipped" Header="Date Shipped" DataType="GridColumnDataType.Date" Sortable="true" Width="13%" MinWidth="130px" VisibleWhenCollapsed="false"></IgbColumn>
+                    <IgbColumn Field="Delivery.DateDelivered" Header="Date Delivered" DataType="GridColumnDataType.Date" Sortable="true" Width="14%" MinWidth="130px" VisibleWhenCollapsed="false"></IgbColumn>
+                </IgbColumnGroup>
+
+                <IgbColumnGroup Header="Order Information" Collapsible="true">
+                    <IgbColumn Field="OrderInformation.Country" Header="Country" Width="10%" MinWidth="100px" Sortable="true" VisibleWhenCollapsed="false"></IgbColumn>
+                    <IgbColumn Field="OrderInformation.City" Header="City" DataType="GridColumnDataType.String" Width="12%" MinWidth="110px" Sortable="true" VisibleWhenCollapsed="false"></IgbColumn>
+                    <IgbColumn Field="OrderInformation.ZipCode" Header="Zip Code" DataType="GridColumnDataType.Number" Width="10%" MinWidth="90px" Sortable="true" VisibleWhenCollapsed="false"></IgbColumn>
+                    <IgbColumn Field="OrderInformation.StreetNumber" Header="Street #" Width="9%" MinWidth="85px" Sortable="true" VisibleWhenCollapsed="false"></IgbColumn>
+                    <IgbColumn Field="OrderInformation.StreetName" Header="Street Name" Width="14%" MinWidth="120px" Sortable="true" VisibleWhenCollapsed="false"></IgbColumn>
+                </IgbColumnGroup>
+            </IgbRowIsland>
+
+        </IgbHierarchicalGrid>
         <div class="mt-3">
             <small class="text-muted">
                 <i class="bi bi-info-circle"></i> Data updates every 3 seconds to simulate live inventory data
@@ -49,7 +82,7 @@
 @code {
     private bool isLoading = true;
     private System.Timers.Timer? updateTimer;
-    private IgbGrid? grid;
+    private IgbHierarchicalGrid? grid;
 
     protected override async Task OnInitializedAsync()
     {
