@@ -22,25 +22,117 @@
     }
     else
     {
-        <IgbGrid Data="FleetService.Data" 
-                 AutoGenerate="false"
-                 AllowFiltering="true"
-                 Height="calc(100vh - 200px)"
-                 @ref="grid">
-            <IgbColumn Field="Id" Header="ID" Width="5%" MinWidth="60px"></IgbColumn>
-            <IgbColumn Field="VehicleId" Header="Vehicle ID" Width="10%" MinWidth="100px" Sortable="true"></IgbColumn>
-            <IgbColumn Field="Make" Header="Make" Width="10%" MinWidth="90px"></IgbColumn>
-            <IgbColumn Field="Model" Header="Model" Width="12%" MinWidth="100px"></IgbColumn>
-            <IgbColumn Field="Year" Header="Year" DataType="GridColumnDataType.Number" Width="7%" MinWidth="70px"></IgbColumn>
-            <IgbColumn Field="Mileage" Header="Mileage" DataType="GridColumnDataType.Number" Width="10%" MinWidth="90px"></IgbColumn>
-            <IgbColumn Field="FuelLevel" Header="Fuel %" DataType="GridColumnDataType.Number" Width="8%" MinWidth="80px"></IgbColumn>
-            <IgbColumn Field="Status" Header="Status" Width="10%" MinWidth="90px"></IgbColumn>
-            <IgbColumn Field="Driver" Header="Driver" Width="12%" MinWidth="110px"></IgbColumn>
-            <IgbColumn Field="Location" Header="Location" Width="12%" MinWidth="110px"></IgbColumn>
-        </IgbGrid>
+        <div class="mb-4">
+            <h2 class="h3 mb-2">Fleet Management</h2>
+            <p class="text-muted mb-3">Master-Detail Grid for managing vehicle acquisition, operations, and maintenance records</p>
+
+            <!-- Summary Cards -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-3">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">
+                            <h6 class="card-title">Total Vehicles</h6>
+                            <h3 class="mb-0">@FleetService.Data.Count</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-success text-white">
+                        <div class="card-body">
+                            <h6 class="card-title">Active</h6>
+                            <h3 class="mb-0">@FleetService.Data.Count(v => v.Status == "Active")</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-warning text-dark">
+                        <div class="card-body">
+                            <h6 class="card-title">In Maintenance</h6>
+                            <h3 class="mb-0">@FleetService.Data.Count(v => v.Status == "Maintenance")</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-info text-white">
+                        <div class="card-body">
+                            <h6 class="card-title">Avg Fuel Level</h6>
+                            <h3 class="mb-0">@(FleetService.Data.Any() ? FleetService.Data.Average(v => v.FuelLevel).ToString("N1") : "0")%</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Master Grid -->
+        <div class="card shadow-sm mb-3">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0">Vehicle Fleet</h5>
+            </div>
+            <div class="card-body p-0">
+                <IgbGrid Data="FleetService.Data"
+                         AutoGenerate="false"
+                         AllowFiltering="true"
+                         PrimaryKey="VehicleId"
+                         Height="400px"
+                         @ref="grid">
+                    <IgbColumn Field="VehicleId" Header="Vehicle ID" Width="12%" Sortable="true" Filterable="true"></IgbColumn>
+                    <IgbColumn Field="Make" Header="Make" Width="10%" Sortable="true" Filterable="true"></IgbColumn>
+                    <IgbColumn Field="Model" Header="Model" Width="12%" Sortable="true" Filterable="true"></IgbColumn>
+                    <IgbColumn Field="Year" Header="Year" DataType="GridColumnDataType.Number" Width="8%" Sortable="true"></IgbColumn>
+                    <IgbColumn Field="Mileage" Header="Mileage" DataType="GridColumnDataType.Number" Width="10%" Sortable="true"></IgbColumn>
+                    <IgbColumn Field="FuelLevel" Header="Fuel %" DataType="GridColumnDataType.Number" Width="9%" Sortable="true"></IgbColumn>
+                    <IgbColumn Field="Status" Header="Status" Width="11%" Filterable="true"></IgbColumn>
+                    <IgbColumn Field="Driver" Header="Driver" Width="13%" Filterable="true"></IgbColumn>
+                    <IgbColumn Field="Location" Header="Location" Width="15%" Filterable="true"></IgbColumn>
+                </IgbGrid>
+            </div>
+        </div>
+
+        <!-- Maintenance Detail Grid -->
+        @if (selectedVehicle != null)
+        {
+            <div class="card shadow-sm">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">Maintenance History - @selectedVehicle.VehicleId (@selectedVehicle.Make @selectedVehicle.Model)</h5>
+                </div>
+                <div class="card-body p-0">
+                    @{
+                        var maintenanceRecords = FleetService.GetMaintenanceForVehicle(selectedVehicle.VehicleId);
+                    }
+                    @if (maintenanceRecords.Any())
+                    {
+                        <IgbGrid Data="maintenanceRecords"
+                                 AutoGenerate="false"
+                                 Height="300px"
+                                 @ref="maintenanceGrid">
+                            <IgbColumn Field="Date" Header="Date" DataType="GridColumnDataType.Date" Width="12%"></IgbColumn>
+                            <IgbColumn Field="Type" Header="Type" Width="15%"></IgbColumn>
+                            <IgbColumn Field="Description" Header="Description" Width="25%"></IgbColumn>
+                            <IgbColumn Field="Cost" Header="Cost" DataType="GridColumnDataType.Currency" Width="10%"></IgbColumn>
+                            <IgbColumn Field="Technician" Header="Technician" Width="15%"></IgbColumn>
+                            <IgbColumn Field="Status" Header="Status" Width="12%"></IgbColumn>
+                            <IgbColumn Field="Mileage" Header="Mileage" DataType="GridColumnDataType.Number" Width="11%"></IgbColumn>
+                        </IgbGrid>
+                    }
+                    else
+                    {
+                        <div class="p-3 text-center text-muted">
+                            <p>No maintenance records found for this vehicle.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info" role="alert">
+                <i class="bi bi-info-circle"></i> Select a vehicle from the grid above to view its maintenance history.
+            </div>
+        }
+
         <div class="mt-3">
             <small class="text-muted">
-                <i class="bi bi-info-circle"></i> Data updates every 3 seconds to simulate live fleet tracking
+                <i class="bi bi-info-circle"></i> Data updates every 3 seconds to simulate live fleet tracking. Click on a row to view maintenance history.
             </small>
         </div>
     }
@@ -50,6 +142,8 @@
     private bool isLoading = true;
     private System.Timers.Timer? updateTimer;
     private IgbGrid? grid;
+    private IgbGrid? maintenanceGrid;
+    private FleetData? selectedVehicle = null;
 
     protected override async Task OnInitializedAsync()
     {
@@ -64,6 +158,12 @@
             FleetService.UpdateAllData();
         };
         updateTimer.Start();
+
+        // Select first vehicle by default
+        if (FleetService.Data.Any())
+        {
+            selectedVehicle = FleetService.Data.First();
+        }
     }
 
     private void OnDataChanged()
@@ -74,6 +174,10 @@
             if (grid != null)
             {
                 grid.MarkForCheck();
+            }
+            if (maintenanceGrid != null)
+            {
+                maintenanceGrid.MarkForCheck();
             }
         });
     }

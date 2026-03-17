@@ -19,6 +19,7 @@ public class FleetService
     };
 
     public List<FleetData> Data { get; private set; } = new();
+    public Dictionary<string, List<MaintenanceData>> MaintenanceData { get; private set; } = new();
     public event Action? OnDataChanged;
 
     public FleetService(HttpClient httpClient)
@@ -30,8 +31,25 @@ public class FleetService
     {
         try
         {
-            var jsonText = await _httpClient.GetStringAsync(VehicleDataUrl);
-            Data = JsonSerializer.Deserialize<List<FleetData>>(jsonText, options) ?? new();
+            // Load vehicles data
+            var vehicleJsonText = await _httpClient.GetStringAsync(VehicleDataUrl);
+            Data = JsonSerializer.Deserialize<List<FleetData>>(vehicleJsonText, options) ?? new();
+
+            // Load maintenance data
+            try
+            {
+                var maintenanceJsonText = await _httpClient.GetStringAsync(MaintanenceDataUrl);
+                var maintenanceList = JsonSerializer.Deserialize<List<MaintenanceData>>(maintenanceJsonText, options) ?? new();
+
+                // Group maintenance records by vehicleId
+                MaintenanceData = maintenanceList
+                    .GroupBy(m => m.VehicleId ?? string.Empty)
+                    .ToDictionary(g => g.Key, g => g.ToList());
+            }
+            catch
+            {
+                // Maintenance data is optional - continue if it fails
+            }
 
             OnDataChanged?.Invoke();
         }
@@ -55,5 +73,14 @@ public class FleetService
         }
 
         OnDataChanged?.Invoke();
+    }
+
+    public List<MaintenanceData> GetMaintenanceForVehicle(string? vehicleId)
+    {
+        if (string.IsNullOrEmpty(vehicleId) || !MaintenanceData.ContainsKey(vehicleId))
+        {
+            return new List<MaintenanceData>();
+        }
+        return MaintenanceData[vehicleId];
     }
 }

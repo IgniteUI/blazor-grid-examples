@@ -39,4 +39,7 @@ public class FleetData
     
     [JsonPropertyName("nextService")]
     public DateTime NextService { get; set; }
+
+    // Property for child grid data (not serialized from JSON)
+    public List<MaintenanceData> MaintenanceRecords { get; set; } = new();
 }
