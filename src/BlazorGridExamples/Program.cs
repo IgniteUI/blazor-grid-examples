@@ -15,10 +15,10 @@ builder.Services.AddRazorComponents()
 // Register IgniteUI Blazor
 builder.Services.AddIgniteUIBlazor();
 
-// Register HttpClient for all RCL services
+// Register HttpClient for all RCL services (except HRService which uses embedded data)
 builder.Services.AddHttpClient<FinancialService>();
 builder.Services.AddHttpClient<SalesService>();
-builder.Services.AddHttpClient<HRService>();
+builder.Services.AddScoped<HRService>();
 builder.Services.AddHttpClient<InventoryService>();
 builder.Services.AddHttpClient<FleetService>();
 
