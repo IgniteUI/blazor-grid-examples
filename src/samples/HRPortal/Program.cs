@@ -11,8 +11,8 @@ builder.Services.AddRazorComponents()
 // Register IgniteUI Blazor
 builder.Services.AddIgniteUIBlazor();
 
-// Register HRService (no HttpClient needed - uses embedded data)
-builder.Services.AddScoped<HRService>();
+// Register HttpClient for HRService
+builder.Services.AddHttpClient<HRService>();
 
 var app = builder.Build();
 

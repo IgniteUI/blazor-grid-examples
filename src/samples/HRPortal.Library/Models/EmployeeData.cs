@@ -28,12 +28,12 @@ public class EmployeeData
     [JsonPropertyName("Status")]
     public string? Status { get; set; }
 
+    [JsonPropertyName("Manager")]
+    public string? Manager { get; set; }
+
     [JsonPropertyName("Location")]
     public string? Location { get; set; }
 
     [JsonPropertyName("Performance")]
     public double? Performance { get; set; }
-
-    [JsonPropertyName("Age")]
-    public int? Age { get; set; }
 }
