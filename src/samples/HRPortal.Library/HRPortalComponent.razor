@@ -30,7 +30,24 @@
                      FilterMode="@FilterMode.ExcelStyleFilter"
                      RowSelection="@GridSelectionMode.Multiple"
                      Height="calc(100vh - 200px)"
+                     SortingExpressionsChange="OnSortingExpressionsChange"
                      @ref="treeGrid">
+            <IgbGridToolbar>
+                <IgbGridToolbarTitle>HR Portal</IgbGridToolbarTitle>
+                <IgbGridToolbarActions>
+                    @if (isSorted)
+                    {
+                        <IgbButton Variant="ButtonVariant.Flat" Clicked="ClearSortingAsync">
+                            Clear Sort
+                        </IgbButton>
+                    }
+                    <IgbGridToolbarHiding></IgbGridToolbarHiding>
+                    <IgbGridToolbarPinning></IgbGridToolbarPinning>
+                    <IgbGridToolbarExporter ExportExcel="true" ExportCSV="false"></IgbGridToolbarExporter>
+                    <IgbGridToolbarAdvancedFiltering></IgbGridToolbarAdvancedFiltering>
+                </IgbGridToolbarActions>
+            </IgbGridToolbar>
+            <IgbPaginator PerPage="20"></IgbPaginator>
             <IgbColumn Field="Name" Header="Employee Name" Width="18%" MinWidth="150px" Sortable="true" Resizable="true"></IgbColumn>
             <IgbColumn Field="Title" Header="Job Title" Width="18%" MinWidth="140px" Sortable="true" Resizable="true"></IgbColumn>
             <IgbColumn Field="Department" Header="Department" Width="10%" MinWidth="100px" Sortable="true" Resizable="true"></IgbColumn>
@@ -46,6 +63,7 @@
 
 @code {
     private bool isLoading = true;
+    private bool isSorted = false;
     private IgbTreeGrid? treeGrid;
 
     protected override async Task OnInitializedAsync()
@@ -53,6 +71,21 @@
         HRService.OnDataChanged += OnDataChanged;
         await HRService.LoadDataAsync();
         isLoading = false;
+    }
+
+    private void OnSortingExpressionsChange(IgbSortingExpressionEventArgs args)
+    {
+        isSorted = args.Detail != null && args.Detail.Length > 0;
+        StateHasChanged();
+    }
+
+    private async Task ClearSortingAsync()
+    {
+        if (treeGrid != null)
+        {
+            await treeGrid.ClearSortAsync();
+        }
+        isSorted = false;
     }
 
     private void OnDataChanged()
