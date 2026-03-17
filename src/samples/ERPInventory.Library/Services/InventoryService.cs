@@ -27,11 +27,18 @@ public class InventoryService
         {
             var jsonText = await _httpClient.GetStringAsync(DataUrl);
             Data = JsonSerializer.Deserialize<List<InventoryData>>(jsonText, options) ?? new();
-            
+
             // Calculate derived fields
             foreach (var record in Data)
             {
-                record.TotalValue = Math.Round(record.Quantity * record.UnitPrice, 2);
+                // Set unitsSold from last month's sales data
+                if (record.SalesTrendData.Count > 0)
+                {
+                    record.UnitsSold = record.SalesTrendData[^1].UnitsSold;
+                }
+
+                // Calculate totalNetProfit
+                record.TotalNetProfit = Math.Round(record.UnitsSold * record.NetPrice, 2);
             }
 
             OnDataChanged?.Invoke();
@@ -46,7 +53,7 @@ public class InventoryService
     {
         foreach (var dataRow in Data)
         {
-            // Simulate live data updates - randomly adjust quantity
+            // Simulate live data updates - randomly adjust units sold
             var volatility = 0.05;
             var rnd = Math.Round(Random.Shared.NextDouble(), 2);
             var changePercent = 2 * volatility * rnd;
@@ -55,12 +62,11 @@ public class InventoryService
                 changePercent -= 2 * volatility;
             }
 
-            var changeAmount = dataRow.Quantity * changePercent;
-            var newQuantity = dataRow.Quantity + (int)Math.Round(changeAmount);
-            dataRow.Quantity = Math.Max(0, newQuantity);
-            
-            dataRow.TotalValue = Math.Round(dataRow.Quantity * dataRow.UnitPrice, 2);
-            dataRow.LastUpdated = DateTime.Now;
+            var changeAmount = dataRow.UnitsSold * changePercent;
+            var newUnitsSold = dataRow.UnitsSold + (int)Math.Round(changeAmount);
+            dataRow.UnitsSold = Math.Max(0, newUnitsSold);
+
+            dataRow.TotalNetProfit = Math.Round(dataRow.UnitsSold * dataRow.NetPrice, 2);
         }
 
         OnDataChanged?.Invoke();
