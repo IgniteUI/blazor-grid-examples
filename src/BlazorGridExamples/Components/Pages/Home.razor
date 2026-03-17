@@ -1,0 +1,47 @@
+﻿@page "/"
+@page "/{SampleKey}"
+@rendermode InteractiveServer
+@using FinanceGrid.Library
+@using SalesGrid.Library
+@using HRPortal.Library
+@using ERPInventory.Library
+@using FleetManagement.Library
+@inject NavigationManager NavigationManager
+
+<PageTitle>Blazor Grid Examples</PageTitle>
+
+<TabNavigation>
+    @if (SampleKey == "finance-grid")
+    {
+        <FinanceGridComponent />
+    }
+    else if (SampleKey == "sales-grid")
+    {
+        <SalesGridComponent />
+    }
+    else if (SampleKey == "hr-portal")
+    {
+        <HRPortalComponent />
+    }
+    else if (SampleKey == "erp-inventory")
+    {
+        <ERPInventoryComponent />
+    }
+    else if (SampleKey == "fleet-management")
+    {
+        <FleetManagementComponent />
+    }
+</TabNavigation>
+
+@code {
+    [Parameter]
+    public string? SampleKey { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (string.IsNullOrEmpty(SampleKey))
+        {
+            NavigationManager.NavigateTo("/finance-grid");
+        }
+    }
+}

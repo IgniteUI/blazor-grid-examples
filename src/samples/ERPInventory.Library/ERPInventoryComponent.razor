@@ -1,0 +1,87 @@
+@using ERPInventory.Library.Services
+@using ERPInventory.Library.Models
+@using IgniteUI.Blazor.Controls
+@inject InventoryService InventoryService
+@implements IDisposable
+
+<div class="container-fluid p-4">
+    @if (isLoading)
+    {
+        <div class="text-center my-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-3">Loading inventory data...</p>
+        </div>
+    }
+    else if (!InventoryService.Data.Any())
+    {
+        <div class="alert alert-warning" role="alert">
+            No data available. Please check your connection.
+        </div>
+    }
+    else
+    {
+        <IgbGrid Data="InventoryService.Data" 
+                 AutoGenerate="false"
+                 AllowFiltering="true"
+                 Height="calc(100vh - 200px)"
+                 @ref="grid">
+            <IgbColumn Field="Id" Header="ID" Width="5%" MinWidth="60px"></IgbColumn>
+            <IgbColumn Field="ProductName" Header="Product" Width="15%" MinWidth="130px" Sortable="true"></IgbColumn>
+            <IgbColumn Field="Category" Header="Category" Width="12%" MinWidth="100px"></IgbColumn>
+            <IgbColumn Field="Sku" Header="SKU" Width="10%" MinWidth="90px"></IgbColumn>
+            <IgbColumn Field="Quantity" Header="Quantity" DataType="GridColumnDataType.Number" Width="8%" MinWidth="85px"></IgbColumn>
+            <IgbColumn Field="UnitPrice" Header="Unit Price" DataType="GridColumnDataType.Number" Width="10%" MinWidth="95px"></IgbColumn>
+            <IgbColumn Field="TotalValue" Header="Total Value" DataType="GridColumnDataType.Number" Width="10%" MinWidth="100px"></IgbColumn>
+            <IgbColumn Field="Supplier" Header="Supplier" Width="12%" MinWidth="110px"></IgbColumn>
+            <IgbColumn Field="Warehouse" Header="Warehouse" Width="10%" MinWidth="100px"></IgbColumn>
+            <IgbColumn Field="Status" Header="Status" Width="8%" MinWidth="80px"></IgbColumn>
+        </IgbGrid>
+        <div class="mt-3">
+            <small class="text-muted">
+                <i class="bi bi-info-circle"></i> Data updates every 3 seconds to simulate live inventory data
+            </small>
+        </div>
+    }
+</div>
+
+@code {
+    private bool isLoading = true;
+    private System.Timers.Timer? updateTimer;
+    private IgbGrid? grid;
+
+    protected override async Task OnInitializedAsync()
+    {
+        InventoryService.OnDataChanged += OnDataChanged;
+        await InventoryService.LoadDataAsync();
+        isLoading = false;
+
+        // Start auto-update timer (every 3 seconds)
+        updateTimer = new System.Timers.Timer(3000);
+        updateTimer.Elapsed += (sender, args) =>
+        {
+            InventoryService.UpdateAllData();
+        };
+        updateTimer.Start();
+    }
+
+    private void OnDataChanged()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+            if (grid != null)
+            {
+                grid.MarkForCheck();
+            }
+        });
+    }
+
+    public void Dispose()
+    {
+        updateTimer?.Stop();
+        updateTimer?.Dispose();
+        InventoryService.OnDataChanged -= OnDataChanged;
+    }
+}
