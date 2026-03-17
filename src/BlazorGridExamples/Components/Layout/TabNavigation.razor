@@ -27,20 +27,20 @@
                     <div class="theme-info">Theme: Bootstrap</div>
                     <div class="theme-info">Mode: Light</div>
                     <div class="action-buttons">
-                        <button class="custom-button" @onclick="() => DownloadSample(CurrentTab.Key)">
+                        <IgbButton Variant="ButtonVariant.Outlined" class="custom-button" @onClick="() => DownloadSample(CurrentTab.Key)">
                             <span class="download-icon">⬇</span>
                             Download
-                        </button>
+                        </IgbButton>
 
-                        <button class="custom-button" @onclick="() => ViewMore(CurrentTab.Key)">
+                        <IgbButton Variant="ButtonVariant.Outlined" class="custom-button" @onClick="() => ViewMore(CurrentTab.Key)">
                             <span>👁</span>
                             View More
-                        </button>
+                        </IgbButton>
 
-                        <button class="custom-button" @onclick="ToggleFullscreen">
+                        <IgbButton Variant="ButtonVariant.Outlined" class="custom-button" @onclick="ToggleFullscreen">
                             <span>@(isFullscreen ? "⊗" : "⛶")</span>
                             <span>@(isFullscreen ? "Exit Fullscreen" : "Fullscreen")</span>
-                        </button>
+                        </IgbButton>
                     </div>
                 </div>
             </div>
@@ -68,6 +68,20 @@
 
     private List<TabInfo> Tabs = new()
     {
+        new TabInfo
+        {
+            Key = "erp-inventory",
+            Title = "ERP/Inventory",
+            Description = "Sample app for ERP/Inventory handling large data volumes using Hierarchical Grid.",
+            Port = 5004
+        },
+        new TabInfo
+        {
+            Key = "hr-portal",
+            Title = "Org Chart/HR Portal",
+            Description = "Example featuring a Tree Grid to manage and display employee information.",
+            Port = 5003
+        },
         new TabInfo 
         { 
             Key = "finance-grid", 
@@ -81,20 +95,6 @@
             Title = "Sales Dashboard", 
             Description = "Sales app example with summaries by region, product, and time periods using Pivot Grid.",
             Port = 5002
-        },
-        new TabInfo 
-        { 
-            Key = "hr-portal", 
-            Title = "HR Portal", 
-            Description = "Example featuring a Tree Grid to manage and display employee information.",
-            Port = 5003
-        },
-        new TabInfo 
-        { 
-            Key = "erp-inventory", 
-            Title = "ERP/Inventory", 
-            Description = "Sample app for ERP/Inventory handling large data volumes using Hierarchical Grid.",
-            Port = 5004
         },
         new TabInfo 
         { 
