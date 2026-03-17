@@ -74,6 +74,7 @@
                          AllowFiltering="true"
                          PrimaryKey="VehicleId"
                          Height="400px"
+                         CellClick="OnCellClick"
                          @ref="grid">
                     <IgbColumn Field="VehicleId" Header="Vehicle ID" Width="12%" Sortable="true" Filterable="true"></IgbColumn>
                     <IgbColumn Field="Make" Header="Make" Width="10%" Sortable="true" Filterable="true"></IgbColumn>
@@ -180,6 +181,25 @@
                 maintenanceGrid.MarkForCheck();
             }
         });
+    }
+
+    private void OnCellClick(object args)
+    {
+        // Extract the row data from the click event
+        dynamic eventArgs = args;
+        try
+        {
+            var clickedVehicle = eventArgs.Cell.Row.Data as FleetData;
+            if (clickedVehicle != null)
+            {
+                selectedVehicle = clickedVehicle;
+                StateHasChanged();
+            }
+        }
+        catch
+        {
+            // Fallback: ignore if event structure is different
+        }
     }
 
     public void Dispose()
