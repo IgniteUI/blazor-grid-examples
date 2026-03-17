@@ -4,7 +4,7 @@
 @inject SalesService SalesService
 @implements IDisposable
 
-<div class="container-fluid p-4">
+<div class="container-fluid p-4 sales-dashboard">
     @if (isLoading)
     {
         <div class="text-center my-5">
@@ -22,26 +22,36 @@
     }
     else
     {
-        <IgbGrid Data="SalesService.Data" 
-                 AutoGenerate="false"
-                 AllowFiltering="true"
-                 Height="calc(100vh - 200px)"
-                 @ref="grid">
-            <IgbColumn Field="Id" Header="ID" Width="5%" MinWidth="60px"></IgbColumn>
-            <IgbColumn Field="Product" Header="Product" Width="15%" MinWidth="120px" Sortable="true"></IgbColumn>
-            <IgbColumn Field="SalesPerson" Header="Sales Person" Width="15%" MinWidth="120px" Sortable="true"></IgbColumn>
-            <IgbColumn Field="Amount" Header="Amount" DataType="GridColumnDataType.Number" Width="10%" MinWidth="80px"></IgbColumn>
-            <IgbColumn Field="Value" Header="Value" DataType="GridColumnDataType.Number" Width="10%" MinWidth="90px"></IgbColumn>
-            <IgbColumn Field="Discount" Header="Discount" DataType="GridColumnDataType.Number" Width="10%" MinWidth="85px"></IgbColumn>
-            <IgbColumn Field="Profit" Header="Profit" DataType="GridColumnDataType.Number" Width="10%" MinWidth="80px"></IgbColumn>
-            <IgbColumn Field="Status" Header="Status" Width="10%" MinWidth="80px"></IgbColumn>
-            <IgbColumn Field="Region" Header="Region" Width="10%" MinWidth="80px"></IgbColumn>
-            <IgbColumn Field="Date" Header="Date" DataType="GridColumnDataType.Date" Width="10%" MinWidth="100px"></IgbColumn>
-        </IgbGrid>
-        <div class="mt-3">
-            <small class="text-muted">
-                <i class="bi bi-info-circle"></i> Data updates every 3 seconds to simulate live sales data
-            </small>
+        <div class="pivot-container">
+            <div class="pivot-header mb-3">
+                <h4>Sales Dashboard - Pivot Analysis</h4>
+                <small class="text-muted">
+                    <i class="bi bi-info-circle"></i> Drag and drop fields to analyze sales data by region, product, and time periods
+                </small>
+            </div>
+
+            <div class="pivot-layout">
+                <div class="pivot-selector-panel">
+                    <IgbPivotDataSelector PivotGrid="pivotGrid" @ref="dataSelector">
+                    </IgbPivotDataSelector>
+                </div>
+
+                <div class="pivot-grid-panel">
+                    <IgbPivotGrid Data="SalesService.Data"
+                                  @ref="pivotGrid"
+                                  Height="calc(100vh - 300px)"
+                                  AllowFiltering="true"
+                                  DefaultExpandState="true"
+                                  PivotConfiguration="@pivotConfiguration">
+                    </IgbPivotGrid>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <small class="text-muted">
+                    <i class="bi bi-info-circle"></i> Data updates every 3 seconds to simulate live sales data
+                </small>
+            </div>
         </div>
     }
 </div>
@@ -49,21 +59,118 @@
 @code {
     private bool isLoading = true;
     private System.Timers.Timer? updateTimer;
-    private IgbGrid? grid;
+    private IgbPivotGrid? pivotGrid;
+    private IgbPivotDataSelector? dataSelector;
+    private IgbPivotConfiguration? pivotConfiguration;
 
     protected override async Task OnInitializedAsync()
     {
         SalesService.OnDataChanged += OnDataChanged;
         await SalesService.LoadDataAsync();
         isLoading = false;
+    }
 
-        // Start auto-update timer (every 3 seconds)
-        updateTimer = new System.Timers.Timer(3000);
-        updateTimer.Elapsed += (sender, args) =>
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
         {
-            SalesService.UpdateAllData();
+            // Configure pivot grid after components are rendered
+            ConfigurePivotGrid();
+            StateHasChanged();
+
+            // Start auto-update timer (every 3 seconds)
+            updateTimer = new System.Timers.Timer(3000);
+            updateTimer.Elapsed += (sender, args) =>
+            {
+                SalesService.UpdateAllData();
+            };
+            updateTimer.Start();
+        }
+    }
+
+    private void ConfigurePivotGrid()
+    {
+        pivotConfiguration = new IgbPivotConfiguration();
+
+        // Configure row dimensions (what we group by vertically)
+        pivotConfiguration.Rows = new IgbPivotDimension[]
+        {
+            new IgbPivotDimension
+            {
+                MemberName = "Region",
+                Enabled = true,
+                DisplayName = "Region"
+            },
+            new IgbPivotDimension
+            {
+                MemberName = "Product",
+                Enabled = true,
+                DisplayName = "Product"
+            }
         };
-        updateTimer.Start();
+
+        // Configure column dimensions (what we pivot across horizontally)
+        pivotConfiguration.Columns = new IgbPivotDimension[]
+        {
+            new IgbPivotDimension
+            {
+                MemberName = "Status",
+                Enabled = true,
+                DisplayName = "Status"
+            }
+        };
+
+        // Configure value aggregations (what we measure)
+        pivotConfiguration.Values = new IgbPivotValue[]
+        {
+            new IgbPivotValue
+            {
+                Member = "Value",
+                Enabled = true,
+                DisplayName = "Total Sales",
+                Aggregate = new IgbPivotAggregator
+                {
+                    Key = "SUM",
+                    Label = "Sum",
+                    AggregatorName = PivotAggregationType.SUM
+                }
+            },
+            new IgbPivotValue
+            {
+                Member = "Profit",
+                Enabled = true,
+                DisplayName = "Total Profit",
+                Aggregate = new IgbPivotAggregator
+                {
+                    Key = "SUM",
+                    Label = "Sum",
+                    AggregatorName = PivotAggregationType.SUM
+                }
+            },
+            new IgbPivotValue
+            {
+                Member = "Amount",
+                Enabled = true,
+                DisplayName = "Units Sold",
+                Aggregate = new IgbPivotAggregator
+                {
+                    Key = "SUM",
+                    Label = "Sum",
+                    AggregatorName = PivotAggregationType.SUM
+                }
+            }
+        };
+
+        // Configure filter dimensions
+        pivotConfiguration.Filters = new IgbPivotDimension[]
+        {
+            new IgbPivotDimension
+            {
+                MemberName = "SalesPerson",
+                Enabled = false,
+                DisplayName = "Sales Person"
+            }
+        };
     }
 
     private void OnDataChanged()
@@ -71,9 +178,9 @@
         InvokeAsync(() =>
         {
             StateHasChanged();
-            if (grid != null)
+            if (pivotGrid != null)
             {
-                grid.MarkForCheck();
+                pivotGrid.MarkForCheck();
             }
         });
     }
