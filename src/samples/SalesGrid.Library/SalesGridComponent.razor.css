@@ -1,0 +1,87 @@
+.sales-dashboard {
+    width: 100%;
+    height: 100%;
+}
+
+.pivot-container {
+    width: 100%;
+    height: 100%;
+}
+
+.pivot-header h4 {
+    color: var(--ig-primary-500, #3f51b5);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.pivot-layout {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    height: calc(100vh - 250px);
+}
+
+.pivot-selector-panel {
+    flex: 0 0 300px;
+    min-width: 300px;
+    max-width: 350px;
+    background: var(--ig-surface-500, #fff);
+    border: 1px solid var(--ig-gray-300, #e0e0e0);
+    border-radius: 4px;
+    padding: 1rem;
+    overflow-y: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pivot-grid-panel {
+    flex: 1;
+    min-width: 0;
+    background: var(--ig-surface-500, #fff);
+    border: 1px solid var(--ig-gray-300, #e0e0e0);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .pivot-layout {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .pivot-selector-panel {
+        flex: 0 0 auto;
+        max-width: 100%;
+        height: 300px;
+    }
+
+    .pivot-grid-panel {
+        flex: 1;
+        min-height: 400px;
+    }
+}
+
+/* Theme-specific styling for Indigo Light */
+::deep .igx-pivot-grid {
+    --igx-primary-color: #3f51b5;
+    --igx-secondary-color: #ff4081;
+}
+
+::deep .igx-pivot-data-selector {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* KPI cell styling */
+::deep .pivot-value-cell {
+    position: relative;
+}
+
+::deep .pivot-value-cell::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4caf50 0%, #ffc107 50%, #f44336 100%);
+    transition: width 0.3s ease;
+}
