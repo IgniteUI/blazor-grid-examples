@@ -24,8 +24,7 @@
     {
         <IgbTreeGrid Data="HRService.Data"
                      PrimaryKey="Id"
-                     ForeignKey="ParentId"
-                     AutoGenerate="false"
+                     ChildDataKey="Employees"
                      AllowFiltering="true"
                      FilterMode="@FilterMode.ExcelStyleFilter"
                      RowSelection="@GridSelectionMode.Multiple"
@@ -52,7 +51,7 @@
             <IgbColumn Field="Title" Header="Job Title" Width="18%" MinWidth="140px" Sortable="true" Resizable="true"></IgbColumn>
             <IgbColumn Field="Department" Header="Department" Width="10%" MinWidth="100px" Sortable="true" Resizable="true"></IgbColumn>
             <IgbColumn Field="Salary" Header="Salary" DataType="GridColumnDataType.Number" Width="9%" MinWidth="85px" Sortable="true" Resizable="true"></IgbColumn>
-            <IgbColumn Field="HireDate" Header="Hire Date" DataType="GridColumnDataType.Date" Width="10%" MinWidth="95px" Sortable="true" Resizable="true"></IgbColumn>
+            @* <IgbColumn Field="HireDate" Header="Hire Date" DataType="GridColumnDataType.Date" Width="10%" MinWidth="95px" Sortable="true" Resizable="true"></IgbColumn> *@
             <IgbColumn Field="Status" Header="Status" Width="8%" MinWidth="80px" Sortable="true" Resizable="true"></IgbColumn>
             <IgbColumn Field="Manager" Header="Manager" Width="12%" MinWidth="100px" Sortable="true" Resizable="true"></IgbColumn>
             <IgbColumn Field="Location" Header="Location" Width="9%" MinWidth="85px" Sortable="true" Resizable="true"></IgbColumn>
