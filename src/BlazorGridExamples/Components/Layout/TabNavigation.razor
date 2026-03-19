@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="sample-actions">
-                    <div class="theme-info">Theme: Bootstrap</div>
+                    <div class="theme-info">Theme: @CurrentTab.Theme</div>
                     <div class="theme-info">Mode: Light</div>
                     <div class="action-buttons">
                         <IgbButton Variant="ButtonVariant.Outlined" class="custom-button" @onClick="() => DownloadSample(CurrentTab.Key)">
@@ -64,6 +64,7 @@
         public string Title { get; set; } = "";
         public string Description { get; set; } = "";
         public int Port { get; set; }
+        public string Theme { get; set; } = "Bootstrap";
     }
 
     private List<TabInfo> Tabs = new()
@@ -80,7 +81,8 @@
             Key = "hr-portal",
             Title = "Org Chart/HR Portal",
             Description = "Example featuring a Tree Grid to manage and display employee information.",
-            Port = 5003
+            Port = 5003,
+            Theme = "Fluent"
         },
         new TabInfo 
         { 

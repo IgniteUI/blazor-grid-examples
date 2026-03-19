@@ -14,9 +14,6 @@ builder.Services.AddIgniteUIBlazor();
 // Register HttpClient for HRService
 builder.Services.AddHttpClient<HRService>();
 
-// Register custom services
-builder.Services.AddScoped<HRService>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
