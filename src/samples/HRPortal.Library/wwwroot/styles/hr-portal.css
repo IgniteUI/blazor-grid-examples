@@ -1,0 +1,17 @@
+.employee-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 100%;
+}
+
+.employee-cell igc-avatar {
+    flex-shrink: 0;
+    --ig-size: var(--ig-size-small);
+}
+
+.employee-cell span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

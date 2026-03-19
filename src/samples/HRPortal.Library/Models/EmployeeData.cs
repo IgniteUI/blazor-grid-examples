@@ -37,6 +37,9 @@ public class EmployeeData
     [JsonPropertyName("Performance")]
     public double? Performance { get; set; }
 
+    [JsonPropertyName("Picture")]
+    public string? Picture { get; set; }
+
     [JsonPropertyName("Employees")]
     public List<EmployeeData>? Employees { get; set; }
 }

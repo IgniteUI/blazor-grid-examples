@@ -47,7 +47,8 @@
                 </IgbGridToolbarActions>
             </IgbGridToolbar>
             <IgbPaginator PerPage="20"></IgbPaginator>
-            <IgbColumn Field="Name" Header="Employee Name" Width="18%" MinWidth="150px" Sortable="true" Resizable="true"></IgbColumn>
+            <IgbColumn Field="Name" Header="Employee Name" Width="18%" MinWidth="200px" Sortable="true" Resizable="true" Pinned="true"
+                       BodyTemplateScript="AvatarCellTemplate"></IgbColumn>
             <IgbColumn Field="Title" Header="Job Title" Width="18%" MinWidth="140px" Sortable="true" Resizable="true"></IgbColumn>
             <IgbColumn Field="Department" Header="Department" Width="10%" MinWidth="100px" Sortable="true" Resizable="true"></IgbColumn>
             <IgbColumn Field="Salary" Header="Salary" DataType="GridColumnDataType.Number" Width="9%" MinWidth="85px" Sortable="true" Resizable="true"></IgbColumn>
@@ -104,3 +105,6 @@
         HRService.OnDataChanged -= OnDataChanged;
     }
 }
+
+
+<script src="_content/HRPortal.Library/scripts/hr-templates.js"></script>
